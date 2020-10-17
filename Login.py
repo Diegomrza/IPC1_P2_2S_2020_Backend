@@ -1,7 +1,5 @@
 class Usuario:
 
-    usuarios = []
-
     def __init__(self, id, nombre, apellido, usuario, password):
     	self.nombre = nombre
     	self.apellido = apellido
@@ -15,6 +13,7 @@ class Usuario:
     		print("Error")
 
 
-usuario1 = Usuario(1, "Diego","Robles","Squery",'123')
+usuario1 = Usuario(0, "Diego","Robles","Squery",'123')
 
-usuario1.muestra("Squery", "1234")
+#usuario1.muestra("Squery", "1234")
+
