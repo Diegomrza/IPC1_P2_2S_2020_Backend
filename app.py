@@ -3,8 +3,8 @@ from Login import Usuario
 
 
 usuarios = []
-usuarios.append(Usuario(1, "Diego", "Robles", "Squartul", "123"))
-usuarios.append(Usuario(2,"Angel", "Avila", "Rangolfa","123"))
+usuarios.append(Usuario(1, "Diego", "Robles", "squery", "123"))
+usuarios.append(Usuario(2,"Angel", "Avila", "rangolfa","123"))
 
 
 app = Flask(__name__)
