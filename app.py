@@ -36,7 +36,7 @@ def login():
 
 @app.route("/")
 def index():
-	return "<h1>Prueba de pagina en la nube</h1>"
+	return "<h1>Hola wenas</h1>"
 
 if __name__ == "__main__":
 	app.run(threaded = True,port = 5000, debug = True)
