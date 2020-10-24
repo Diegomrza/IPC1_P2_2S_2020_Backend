@@ -23,7 +23,7 @@ def login():
 			if user.verificacion(usuario,password) == True:
 				return user.dump()
 		#Devuelve un mensaje si no encontró un usuario
-		return "No se encontró el usuario"
+		return "False"
 
 
 @app.route("/registro")
