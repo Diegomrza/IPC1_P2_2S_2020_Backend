@@ -1,30 +1,30 @@
 class Usuario:
 
-    def __init__(self, id, nombre, apellido, usuario, password):
-    	self.id = id
-    	self.nombre = nombre
-    	self.apellido = apellido
-    	self.usuario = usuario
-    	self.password = password
+    def __init__(self, id, nombre, apellido, user, password, tipo):
+        self.id = id
+        self.nombre = nombre
+        self.apellido = apellido
+        self.user = user
+        self.password = password
+        self.tipo =	tipo
 
-    def muestra(self, usuario, password):
+    def verificacion(self, user, password):
 
-
-    	if self.usuario == usuario and self.password == password:
-    		
-    		return True
-    	else:
-    		return False
+        if self.user == user and self.password == password:
+            print('La autenticacion fue correcta')
+            return True
+        else:
+	        return False
+    	
 
     def dump(self):
     
     	return {
-    	'id' :self.id,
-    	'nombre' :self.usuario
+    	    'id':self.id,
+    	    'nombre':self.nombre,
+            'apellido':self.apellido,
+            'user':self.user,
+            'contraseña':self.password,
+            'tipo':self.tipo
     	}		
-
-
-usuario1 = Usuario(0, "Diego","Robles","Squery",'123')
-
-#usuario1.muestra("Squery", "1234")
 

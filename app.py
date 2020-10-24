@@ -1,42 +1,34 @@
 from flask import Flask, request, jsonify
 from Login import Usuario
-
+from flask_cors import CORS
 
 usuarios = []
-usuarios.append(Usuario(1, "Diego", "Robles", "squery", "123"))
-usuarios.append(Usuario(2,"Angel", "Avila", "rangolfa","123"))
-
+usuarios.append(Usuario(0, "Usuario", "Maestro", "admin", "admin", 'Administrador'))
+usuarios.append(Usuario(1,'Diego','Robles','Squery','Marihuana7291384650','cliente'))
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/login', methods=['POST'])
 #Método para hacer la autenticación del usuario
 def login():
 	if request.method == 'POST':
 
-		response = {}
-
-		nombre = request.form.get('nombre_usuario')
+		usuario = request.form.get('nombre_usuario')
 		password = request.form.get('password_usuario')
 
 		#For que recorre el arreglo de los usuarios
 		for user in usuarios:
-
-			#Devuelve True si encontró uno
-			if user.muestra(nombre,password) == True:
-
-				response["id"] = user.id
-				response["usuario"] = user.usuario
-
-				return response
-
-		#Devuelve False si no encontró un usuario
-		return "False"
+			#Devuelve los datos del usuario si lo encontró
+			if user.verificacion(usuario,password) == True:
+				return user.dump()
+		#Devuelve un mensaje si no encontró un usuario
+		return "No se encontró el usuario"
 
 
-@app.route("/")
+@app.route("/registro")
 def index():
-	return "<h1>Hola wenas</h1>"
+	return "<h1>Texas</h1>"
 
 if __name__ == "__main__":
 	app.run(threaded = True,port = 5000, debug = True)
