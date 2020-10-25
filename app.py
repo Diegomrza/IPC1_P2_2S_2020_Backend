@@ -31,5 +31,9 @@ def login():
 def index():
 	return "<h1>Texas</h1>"
 
+@app.route("/")
+def indets():
+	return "Hola que tal?"
+
 if __name__ == "__main__":
 	app.run(threaded = True,port = 5000, debug = True)
