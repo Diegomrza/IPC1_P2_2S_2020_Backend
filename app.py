@@ -14,6 +14,7 @@ CORS(app)
 def login():
 	if request.method == 'POST':
 
+		#Para hacer commit
 		usuario = request.form.get('nombre_usuario')
 		password = request.form.get('password_usuario')
 
