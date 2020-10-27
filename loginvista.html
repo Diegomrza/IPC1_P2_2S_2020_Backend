@@ -40,7 +40,7 @@
             }
             console.log(objeto)
 
-            fetch('http://127.0.0.1:5000/login/',{
+            fetch('https://127.0.0.1:5000/login/',{
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers:{
@@ -48,7 +48,7 @@
                 }
             }).then(res => res.json())
             .catch(err =>{
-                console.error('Error', err)
+                console.error('Error', err.message)
                 window.alert("ocurrio un error, ver consola")
             })
             .then(response =>{
