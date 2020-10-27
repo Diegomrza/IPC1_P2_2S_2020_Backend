@@ -24,7 +24,7 @@ def login():
 	password = request.json["password"]
 
 	for user in usuarios:
-		if user.getUsuario() == username and user.getPassword() == password:
+		if user.autenticacion(username, password) == True:
 			
 			return jsonify({
 				"message": "Succesfully",
@@ -53,8 +53,8 @@ def obtener_persona(user):
 			Datos.append(Dato)
 			break
 
-	response = jsonify(Datos)	
-	return (response)
+	respuesta = jsonify(Datos)	
+	return respuesta
 
 #Mostrar todos los usuarios
 @app.route('/usuarios/', methods=['GET'])
@@ -69,8 +69,8 @@ def mostrar_personas():
 				'password': usuario.getPassword()
 				}
 		Datos.append(Dato)
-	response = jsonify(Datos)	
-	return (response)
+	respuesta = jsonify(Datos)	
+	return (respuesta)
 
 #Crear un usuario e ingresarlo al arreglo
 @app.route('/usuarios/', methods=['POST'])
@@ -78,8 +78,11 @@ def agregar_usuario():
 	global usuarios
 	global contador_usuarios
 
+	usuario = request.json['usuario']
+	password = request.json['password']
+
 	for user in usuarios:
-		if user.autenticacion(request.json['usuario'], request.json['password']):
+		if user.autenticacion(usuario, password) == True:
 			return jsonify({"message": "Failed", "reason": "El usuario ya existe"})
 
 	nuevo = Persona(contador_usuarios, request.json['nombre'], request.json['apellido'], request.json['usuario'], request.json['password'])

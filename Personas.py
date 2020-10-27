@@ -7,7 +7,7 @@ class Persona:
         self.password = password
 
     def autenticacion(self, usuario, password):
-        if self.usuario == usuario and self.password == password:
+        if self.usuario == usuario:
             return True
         return False    
 
