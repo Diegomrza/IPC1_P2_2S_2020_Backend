@@ -11,12 +11,10 @@ class Usuario:
     def verificacion(self, user, password):
 
         if self.user == user and self.password == password:
-            print('La autenticacion fue correcta')
             return True
         else:
 	        return False
     	
-
     def dump(self):
     
     	return {
