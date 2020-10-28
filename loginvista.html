@@ -59,6 +59,7 @@
                 }else{
                     alert(`Credenciales correctas, bienvenido ${username}`)
                     sessionStorage.setItem("usuario", username)
+                    sessionStorage.setItem("password", password)
                     location.href = "principal.html"
                 }
             })

@@ -55,11 +55,11 @@ def registro():
 		nuevo = Persona(contador_usuarios, nombre, apellido, usuario, password)
 		contador_usuarios = contador_usuarios + 1
 		usuarios.append(nuevo)	
-		return jsonify({"message": "successfully", "reason": "Usuario creado"})
+		message = {"message": "Successfully","reason": "Usuario creado"}
+		return jsonify(message)
 
-	return jsonify({
-		'message':'Las contraseñas no coinciden'
-	})	
+	message = {"message": "Failed","reason": "El usuario ya existe"}
+	return jsonify(message)	
 
 
 #Mostrar solo un usuario recibiendo su usuario como parámetro
