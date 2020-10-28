@@ -82,7 +82,7 @@
                 console.log(response);
                 console.log(response.message)
                 if (response.message == 'Failed'){
-                    alert(response.message)
+                    alert(response.reason)
                 }else{
                     alert(`Credenciales correctas, ${usuario} creado`)
                     sessionStorage.setItem("usuario", usuario)
