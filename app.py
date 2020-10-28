@@ -12,11 +12,11 @@ usuarios = []
 contador_usuarios = 2
 contador_juegos = 0
 
-usuarios.append(Persona(0,'Usuario','Maestro','admin','admin'))
-usuarios.append(Persona(1,'diego','robles',"squery",'123'))
-usuarios.append(Persona(1,'kelly','herrea',"killy",'123'))
-usuarios.append(Persona(1,'susan','herrera',"susy",'123'))
-usuarios.append(Persona(1,'usuario','generico',"user",'123'))
+usuarios.append(Persona(0,'Usuario','Maestro','admin','admin','administrador'))
+usuarios.append(Persona(1,'diego','robles',"squery",'123','cliente'))
+usuarios.append(Persona(1,'kelly','herrea',"killy",'123','cliente'))
+usuarios.append(Persona(1,'susan','herrera',"susy",'123','cliente'))
+usuarios.append(Persona(1,'usuario','generico',"user",'123','cliente'))
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
@@ -55,7 +55,7 @@ def registro():
 			return jsonify({"message": "Failed", "reason": "El usuario ya existe"})
 
 	if password == confirmPassword:
-		nuevo = Persona(contador_usuarios, nombre, apellido, usuario, password)
+		nuevo = Persona(contador_usuarios, nombre, apellido, usuario, password,'cliente')
 		contador_usuarios = contador_usuarios + 1
 		usuarios.append(nuevo)	
 		mensaje = {"message": "Successfully","reason": "Usuario creado"}
@@ -77,7 +77,8 @@ def obtener_persona(user):
 			    	'nombre': usuario.getNombre(),
 				    'apellido': usuario.getApellido(),
 				    'usuario': usuario.getUsuario(),
-				    'password': usuario.getPassword()
+				    'password': usuario.getPassword(),
+					'tipo': usuario.getTipo()
                     }
 			Datos.append(Dato)
 			break
@@ -95,7 +96,8 @@ def mostrar_personas():
 				'nombre': usuario.getNombre(),
 				'apellido': usuario.getApellido(),
 				'usuario': usuario.getUsuario(),
-				'password': usuario.getPassword()
+				'password': usuario.getPassword(),
+				'tipo': usuario.getTipo()
 				}
 		Datos.append(Dato)
 	respuesta = jsonify(Datos)	

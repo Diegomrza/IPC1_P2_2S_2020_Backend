@@ -5,6 +5,7 @@ class Persona:
         self.apellido = apellido
         self.usuario = usuario
         self.password = password
+        self.tipo = tipo
 
     def autenticacion(self, usuario, password):
         if self.usuario == usuario:
@@ -37,6 +38,9 @@ class Persona:
     def getPassword(self):
         return self.password
 
+    def getTipo(self):
+        return self.tipo    
+
     #Seters
     def setId(self, id):
         self.id = id
@@ -53,3 +57,5 @@ class Persona:
     def setPassword(self, password):
         self.password = password
 
+    def setTipo(self, tipo):
+        self.tipo = tipo
