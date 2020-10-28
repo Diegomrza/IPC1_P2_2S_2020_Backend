@@ -15,7 +15,7 @@ contador_juegos = 0
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin'))
 usuarios.append(Persona(1,'diego','robles',"squery",'123'))
 
-#Método login
+#Método para ingresar
 @app.route('/login/', methods=['POST'])
 def login():
 
@@ -25,7 +25,6 @@ def login():
 
 	for user in usuarios:
 		if user.getUsuario() == username and user.getPassword() == password:
-			
 			return jsonify({
 				"message": "Succesfully",
 				"usuario": user.getUsuario()
@@ -35,6 +34,33 @@ def login():
 		"message": "Failed",
 		"usuario": ""
 	})
+
+#Método para registrar
+@app.route('/registro/', methods=['POST'])
+def registro():
+
+	global usuarios
+	global contador_usuarios
+	nombre = request.json["nombre"]
+	apellido = request.json["apellido"]
+	usuario	= request.json['usuario']
+	password = request.json['password']
+	confirmPassword = request.json['confirmPassword']
+
+	for user in usuarios:
+		if user.getUsuario() == usuario:
+			return jsonify({"message": "Failed", "reason": "El usuario ya existe"})
+
+	if password == confirmPassword:
+		nuevo = Persona(contador_usuarios, nombre, apellido, usuario, password)
+		contador_usuarios = contador_usuarios + 1
+		usuarios.append(nuevo)	
+		return jsonify({"message": "successfully", "reason": "Usuario creado"})
+
+	return jsonify({
+		'message':'Las contraseñas no coinciden'
+	})	
+
 
 #Mostrar solo un usuario recibiendo su usuario como parámetro
 @app.route('/usuarios/<string:user>', methods=['GET'])
@@ -71,7 +97,7 @@ def mostrar_personas():
 		Datos.append(Dato)
 	respuesta = jsonify(Datos)	
 	return (respuesta)
-
+'''
 #Crear un usuario e ingresarlo al arreglo
 @app.route('/usuarios/', methods=['POST'])
 def agregar_usuario():
@@ -88,7 +114,7 @@ def agregar_usuario():
 	nuevo = Persona(contador_usuarios, request.json['nombre'], request.json['apellido'], request.json['usuario'], request.json['password'])
 	contador_usuarios = contador_usuarios + 1
 	usuarios.append(nuevo)	
-	return jsonify({"message": "successfully", "reason": "Usuario creado"})
+	return jsonify({"message": "successfully", "reason": "Usuario creado"})'''
 
 #Modificar un dato del arreglo de usuarios
 @app.route('/usuarios/<string:user>', methods=['PUT'])
