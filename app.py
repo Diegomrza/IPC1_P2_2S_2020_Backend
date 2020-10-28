@@ -24,7 +24,7 @@ def login():
 	password = request.json["password"]
 
 	for user in usuarios:
-		if user.autenticacion(username, password) == True:
+		if user.getUsuario() == username and user.getPassword() == password:
 			
 			return jsonify({
 				"message": "Succesfully",
