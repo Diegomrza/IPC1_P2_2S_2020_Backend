@@ -14,6 +14,9 @@ contador_juegos = 0
 
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin'))
 usuarios.append(Persona(1,'diego','robles',"squery",'123'))
+usuarios.append(Persona(1,'kelly','herrea',"killy",'123'))
+usuarios.append(Persona(1,'susan','herrera',"susy",'123'))
+usuarios.append(Persona(1,'usuario','generico',"user",'123'))
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
@@ -58,7 +61,7 @@ def registro():
 		mensaje = {"message": "Successfully","reason": "Usuario creado"}
 		return jsonify(mensaje)
 
-	mensaje = {"message": "Failed","reason": "Las contraseñas no coinciden"}
+	mensaje = {"message": "Failed","reason": "Las passwords no coinciden"}
 	return jsonify(mensaje)	
 
 
