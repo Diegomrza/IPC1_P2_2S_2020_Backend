@@ -153,6 +153,9 @@ def crear_juego():
 	
 	return jsonify({'message': 'successfully', 'reason': 'juego creado'})
 	
+@app.route('/')
+def mensaje():
+	return "Hola chiquibeibi"
 
 
 if __name__ == "__main__":
