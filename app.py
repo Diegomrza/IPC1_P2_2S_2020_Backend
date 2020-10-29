@@ -46,11 +46,12 @@ def recuperacion():
 
 	for user in usuarios:
 		if user.getUsuario() == username:
+			print(user.getTipo())
 			return jsonify({
 				"message": "Succesfully",
 				"usuario": user.getUsuario(),
 				"password": user.getPassword(),
-				'tipo': user.getTipo()
+				"tipo": user.getTipo()
 				})
 
 	return jsonify({
