@@ -87,80 +87,20 @@
                     <div class="s_product">
                         <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/71IbB6HBvKL._SL1076_.jpg">
                         <div class="s_overlay"></div>
-                        <h3>Texto</h3>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="rate">
-                                <h3>Need For Speed</h3>
-                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
-                                        aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true"
-                                            class="fa fa-star"></i></span></p>
-                                <h5>Q.500.00</h5>
+                                <h3 style="text-align: center;">Need For Speed</h3>
+                                <br>
+                                <h5 style="text-align: center;">Q.500.00</h5>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="s_product">
-                        <img alt=""
-                            src="https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg">
-                        <div class="s_overlay"></div>
-                        <h3>Texto</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rate">
-                                <h3>Zelda</h3>
-                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
-                                        aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true"
-                                            class="fa fa-star"></i></span></p>
-                                <h5>Q.500.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="s_product">
-                        <img alt=""
-                            src="https://vignette.wikia.nocookie.net/nintendo/images/0/04/New_Super_Mario_Bros_Wii_Portada.jpg/revision/latest/scale-to-width-down/340?cb=20130705160034&path-prefix=es">
-                        <div class="s_overlay"></div>
-                        <h3>Texto</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rate">
-                                <h3>New Super Mario Bros Wii</h3>
-                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
-                                        aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i></p>
-                                <h5>Q.500.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="s_product">
-                        <img alt=""
-                            src="https://2.bp.blogspot.com/_7KHM-geGHsw/TH0a9FF-32I/AAAAAAAAAVk/0NIKU6D17uE/s1600/Ggowgos.jpg">
-                        <div class="s_overlay"></div>
-                        <h3>Texto</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rate">
-                                <h3>God Of War</h3>
-                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
-                                        aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
-                                        class="fa fa-star"></i></p>
-                                <h5>Q.500.00</h5>
-                            </div>
-                        </div>
-                    </div>
+                <div id="gameCards" class="col-md-3">
+
+
                 </div>
             </div>
         </div>
@@ -175,6 +115,9 @@
     <script src="js/jquery.bxSlider.js"></script>
     <script></script>
     <script src="js/active.js"></script>
+
+
+
 
     <script>
 
@@ -193,7 +136,23 @@
             })
             .then(response => {
                 var mis_juegos = response;
+                var game_cards = document.querySelector('#gameCards')
 
+                mis_juegos.forEach(juego => {
+                    game_cards.innerHTML += `<div class="s_product">
+                        <img alt="" src="${juego.foto}">
+                        <div class="s_overlay"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3 style="text-align: center;">${juego.nombre}</h3>
+                                <br>
+                                <h5 style="text-align: center;">${juego.precio}</h5>
+                            </div>
+                        </div>
+                    </div>`
+                });
             })
 
             var nombre = sessionStorage.getItem('usuario');
