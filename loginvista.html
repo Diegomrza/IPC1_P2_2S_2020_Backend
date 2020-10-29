@@ -64,11 +64,12 @@
                     alert(`Credenciales correctas, bienvenido ${username}`)
                     sessionStorage.setItem("usuario", username)
                     sessionStorage.setItem("password", password)
-                    alert(response.tipo)
-                    
-                    location.href = "Principal1.html"
-                    location.href = "Principal2.html"
-                    
+                    alert("usted es un: " + response.tipo)
+                    if(response.tipo == "administrador"){
+                        location.href = "Principal1.html"
+                    } else{
+                        location.href = "Principal2.html"
+                    }
                    
                 }
             })

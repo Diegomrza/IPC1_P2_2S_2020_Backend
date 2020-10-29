@@ -176,7 +176,7 @@ def crear_juego():
 	mensaje = {"message": "Successfully","reason": "Juego creado"}
 	return jsonify(mensaje)
 
-	
+#Ruta Principal que no tiene nada
 @app.route('/')
 def mensaje():
 	return "Hola chiquibeibi"
