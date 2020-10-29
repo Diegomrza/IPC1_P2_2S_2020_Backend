@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>  
 <body>
+
     <form class="formulario">
     
     <h1>Login</h1>
@@ -63,7 +64,13 @@
                     alert(`Credenciales correctas, bienvenido ${username}`)
                     sessionStorage.setItem("usuario", username)
                     sessionStorage.setItem("password", password)
-                    location.href = "Principal1.html"
+                    alert(response.tipo)
+                    if(response.tipo == 'administrador'){
+                        location.href = "Principal1.html"
+                    } else{
+                        location.href = "Principal2.html"
+                    }
+                   
                 }
             })
         }
@@ -92,7 +99,7 @@
                 if (response.message == 'Failed'){
                     alert('El usuario no existe')
                 }else{
-                    alert(`Credenciales correctas, su contreseña es ${response.password}`)
+                    alert(`Credenciales correctas, Su contraseña es ${response.password}`)
                 }
             })
 

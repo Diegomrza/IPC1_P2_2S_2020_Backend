@@ -49,7 +49,8 @@ def recuperacion():
 			return jsonify({
 				"message": "Succesfully",
 				"usuario": user.getUsuario(),
-				"password": user.getPassword()
+				"password": user.getPassword(),
+				'tipo': user.getTipo()
 				})
 
 	return jsonify({
