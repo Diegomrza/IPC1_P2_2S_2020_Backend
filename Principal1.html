@@ -136,6 +136,7 @@
             })
             .then(response => {
                 var mis_juegos = response;
+                console.log(mis_juegos)
                 var game_cards = document.querySelector('#gameCards')
 
                 mis_juegos.forEach(juego => {
