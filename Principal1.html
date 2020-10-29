@@ -123,23 +123,23 @@
     function cargarInfo() {
         var nombre = sessionStorage.getItem('usuario');
 
-        fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos',{
+        fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
             method = 'GET',
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-        .catch(err => {
-            console.log(err)
-            alert('Ocurrio un error al momento de obtener los registros')
-        })
-        .then(response => {
-            var mis_juegos = response;
-            console.log(mis_juegos)
-            var game_cards = document.querySelector('#gameCards')
+            .catch(err => {
+                console.log(err)
+                alert('Ocurrio un error al momento de obtener los registros')
+            })
+            .then(response => {
+                var mis_juegos = response;
+                console.log(mis_juegos)
+                var game_cards = document.querySelector('#gameCards')
 
-            mis_juegos.forEach(juego => {
-                game_cards.innerHTML += `<div class="s_product">
+                mis_juegos.forEach(juego => {
+                    game_cards.innerHTML += `<div class="s_product">
                     <img alt="" src="${juego.foto}">
                     <div class="s_overlay"></div>
                 </div>
@@ -152,13 +152,14 @@
                         </div>
                     </div>
                 </div>`
-            });
-        })
+                });
+            })
 
         var nombre = sessionStorage.getItem('usuario');
-        alert('Bienvenido '+ nombre)
+        alert('Bienvenido ' + nombre)
 
     }
-    
+
 </script>
+
 </html>
