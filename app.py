@@ -13,9 +13,9 @@ contador_usuarios = 2
 contador_juegos = 0
 
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin','administrador'))
-usuarios.append(Persona(1,'diego','robles',"squery",'123','cliente'))
-usuarios.append(Persona(1,'kelly','herrea',"killy",'123','cliente'))
-usuarios.append(Persona(1,'susan','herrera',"susy",'123','cliente'))
+usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana','cliente'))
+usuarios.append(Persona(1,'kelly','herrea',"killy",'Arielito','cliente'))
+usuarios.append(Persona(1,'susan','herrera',"susy",'555','cliente'))
 usuarios.append(Persona(1,'usuario','generico',"user",'123','cliente'))
 
 #Método para ingresar
