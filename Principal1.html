@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="cargarInfo()">
+<body onload="cargar()">
     <header>
         <section class="header-top">
             <div class="container">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div id="gameCards" class="col-md-3">
-
+                    
 
                 </div>
             </div>
@@ -107,6 +107,8 @@
     </div>
     </div>
 
+
+    <!-- -->
 
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
@@ -116,50 +118,50 @@
     <script></script>
     <script src="js/active.js"></script>
 
-</body>
 
-<script>
 
-    function cargarInfo() {
-        var nombre = sessionStorage.getItem('usuario');
 
-        fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
-            method = 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
+    <script>
+
+        function cargar() {
+            var nombre = sessionStorage.getItem('usuario');
+            alert('Bienvenido '+ nombre)
+
+            fetch('http://127.0.0.1:5000/obtenerJuegos',{
+                
+            }).then(res => res.json())
             .catch(err => {
                 console.log(err)
                 alert('Ocurrio un error al momento de obtener los registros')
             })
             .then(response => {
+
                 var mis_juegos = response;
                 console.log(mis_juegos)
                 var game_cards = document.querySelector('#gameCards')
 
                 mis_juegos.forEach(juego => {
                     game_cards.innerHTML += `<div class="s_product">
-                    <img alt="" src="${juego.foto}">
-                    <div class="s_overlay"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="rate">
-                            <h3 style="text-align: center;">${juego.nombre}</h3>
-                            <br>
-                            <h5 style="text-align: center;">${juego.precio}</h5>
-                        </div>
+                        <img alt="" src="${juego.foto}">
+                        <div class="s_overlay"></div>
                     </div>
-                </div>`
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3 style="text-align: center;">${juego.nombre}</h3>
+                                <br>
+                                <h5 style="text-align: center;">${juego.precio}</h5>
+                            </div>
+                        </div>
+                    </div>`
                 });
             })
 
-        var nombre = sessionStorage.getItem('usuario');
-        alert('Bienvenido ' + nombre)
 
-    }
+        }
+        
+    </script>
 
-</script>
+</body>
 
 </html>

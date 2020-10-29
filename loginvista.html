@@ -44,7 +44,7 @@
             }
             console.log(objeto)
 
-            fetch('https://proyecto2-201901429.herokuapp.com/login/',{
+            fetch('http://127.0.0.1:5000/login/',{
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers:{
@@ -82,7 +82,7 @@
                 'usuario': username
             }
 
-            fetch('https://proyecto2-201901429.herokuapp.com/recuperar/',{
+            fetch('http://127.0.0.1:5000/recuperar/',{
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers:{

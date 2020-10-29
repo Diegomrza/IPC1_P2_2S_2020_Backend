@@ -25,7 +25,12 @@ lista_juegos.append(Juegos(1, 'God of War', 2015, 300, 'Cocina', 'Estrategia', '
 lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shoote', 'Estrategia', 'Puzzles', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'Nel'))
 lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'Disparos', 'Estrategia', '', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'No hay'))
 lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','sindesc'))
-lista_juegos.append(Juegos(5, 'Minecraf', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png','', 'Si hay'))
+lista_juegos.append(Juegos(5, 'Minecraf', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'Si hay'))
+
+for juego in lista_juegos:
+	print(juego.getNombre())
+	print(juego.getFoto())
+	print(juego.getPrecio())
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
@@ -204,7 +209,7 @@ def obtener_juegos():
 				}
 		Datos.append(Dato)
 	respuesta = jsonify(Datos)	
-	return (respuesta)
+	return respuesta
 
 #Ruta Principal que no tiene nada
 @app.route('/')
