@@ -65,11 +65,10 @@
                     sessionStorage.setItem("usuario", username)
                     sessionStorage.setItem("password", password)
                     alert(response.tipo)
-                    if(response.tipo == 'administrador'){
-                        location.href = "Principal1.html"
-                    } else{
-                        location.href = "Principal2.html"
-                    }
+                    
+                    location.href = "Principal1.html"
+                    location.href = "Principal2.html"
+                    
                    
                 }
             })

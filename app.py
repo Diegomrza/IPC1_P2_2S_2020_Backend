@@ -12,25 +12,27 @@ usuarios = []
 contador_usuarios = 2
 contador_juegos = 0
 
-usuarios.append(Persona(0,'Usuario','Maestro','admin','admin','administrador'))
-usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana','cliente'))
-usuarios.append(Persona(1,'kelly','herrea',"killy",'Arielito','cliente'))
-usuarios.append(Persona(1,'susan','herrera',"susy",'555','cliente'))
-usuarios.append(Persona(1,'usuario','generico',"user",'123','cliente'))
+usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
+usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana',"cliente"))
+usuarios.append(Persona(1,'kelly','herrea',"killy",'Arielito',"cliente"))
+usuarios.append(Persona(1,'susan','herrera',"susy",'555',"cliente"))
+usuarios.append(Persona(1,'usuario','generico',"user",'123',"cliente"))
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
-def login():
+def login(tipo):
 
 	global usuarios
 	username = request.json["usuario"]
 	password = request.json["password"]
+	
 
 	for user in usuarios:
 		if user.getUsuario() == username and user.getPassword() == password:
 			return jsonify({
 				"message": "Succesfully",
-				"usuario": user.getUsuario()
+				"usuario": user.getUsuario(),
+				"tipo": user.getTipo()
 				})
 
 	return jsonify({
@@ -46,12 +48,10 @@ def recuperacion():
 
 	for user in usuarios:
 		if user.getUsuario() == username:
-			print(user.getTipo())
 			return jsonify({
 				"message": "Succesfully",
 				"usuario": user.getUsuario(),
-				"password": user.getPassword(),
-				"tipo": user.getTipo()
+				"password": user.getPassword()
 				})
 
 	return jsonify({
