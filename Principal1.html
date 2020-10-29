@@ -180,7 +180,25 @@
 
         function cargarInfo() {
             var nombre = sessionStorage.getItem('usuario');
-            alert('Bienvenido ' + nombre)
+
+            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos',{
+                method = 'GET',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+            .catch(err => {
+                console.log(err)
+                alert('Ocurrio un error al momento de obtener los registros')
+            })
+            .then(response => {
+                var mis_juegos = response;
+
+            })
+
+            var nombre = sessionStorage.getItem('usuario');
+            alert('Bienvenido '+ nombre)
+
         }
         
     </script>

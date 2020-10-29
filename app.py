@@ -12,11 +12,20 @@ usuarios = []
 contador_usuarios = 2
 contador_juegos = 0
 
+#Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
 usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana',"cliente"))
 usuarios.append(Persona(1,'kelly','herrea',"killy",'Arielito',"cliente"))
 usuarios.append(Persona(1,'susan','herrera',"susy",'555',"cliente"))
 usuarios.append(Persona(1,'usuario','generico',"user",'123',"cliente"))
+
+#Lista de juegos
+lista_juegos.append(Juegos(0, 'Halo', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Hola'))
+lista_juegos.append(Juegos(1, 'God of War', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Adios'))
+lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shoote', 'Estrategia', 'Puzzles', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'Nel'))
+lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'Disparos', 'Estrategia', '', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'No hay'))
+lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','sindesc'))
+lista_juegos.append(Juegos(5, 'Minecraf', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png','', 'Si hay'))
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
@@ -175,6 +184,27 @@ def crear_juego():
 	lista_juegos.append(nuevo_juego)	
 	mensaje = {"message": "Successfully","reason": "Juego creado"}
 	return jsonify(mensaje)
+
+#Método para obtener todos los juegos
+@app.route('/obtenerJuegos')
+def obtener_juegos():
+	global lista_juegos
+	Datos = []
+	for juego in lista_juegos:
+		Dato = {'id': juego.getId(),
+				'nombre': juego.getNombre(),
+				'anio': juego.getAnio(),
+				'precio': juego.getPrecio(),
+				'categoria1': juego.getCategoria1(),
+				'categoria2': juego.getCategoria2(),
+				'categoria3': juego.getCategoria3(),
+				'foto': juego.getFoto(),
+				'banner': juego.getBanner(),
+				'descripcion': juego.getDescripcion()
+				}
+		Datos.append(Dato)
+	respuesta = jsonify(Datos)	
+	return (respuesta)
 
 #Ruta Principal que no tiene nada
 @app.route('/')
