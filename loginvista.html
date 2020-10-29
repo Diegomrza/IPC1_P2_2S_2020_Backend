@@ -20,11 +20,14 @@
          <input id="usuario" type="text" placeholder="Nombre de usuario">
          </div>
          <div class="input-contenedor">
-        <i class="fas fa-key icon"></i>
+         <i class="fas fa-key icon"></i>
          <input id="password"type="password" placeholder="Contraseña">
-         
          </div>
          <input onclick="iniciarSesion()" text-align:center value="Iniciar Sesión" class="button">
+         <br></br>
+         <div>
+            <input onclick="recuperarPassword()" text-align:center value="recuperar contraseña" class="button">
+         </div>
          <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
          <p>¿No tienes una cuenta? <a class="link" href="registrarvista.html"> Registrate </a></p>
      </div>
@@ -60,9 +63,39 @@
                     alert(`Credenciales correctas, bienvenido ${username}`)
                     sessionStorage.setItem("usuario", username)
                     sessionStorage.setItem("password", password)
-                    location.href = "Principal0.html"
+                    location.href = "Principal1.html"
                 }
             })
+        }
+
+
+        function recuperarPassword(){
+            var username = document.querySelector('#usuario').value
+            var objeto = {
+                'usuario': username
+            }
+
+            fetch('https://proyecto2-201901429.herokuapp.com/recuperar/',{
+                method: 'POST',
+                body: JSON.stringify(objeto),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+            .catch(err =>{
+                console.error('Error', err)
+                window.alert("ocurrio un error, ver consola")
+            })
+            .then(response =>{
+                console.log(response);
+                console.log(response.message)
+                if (response.message == 'Failed'){
+                    alert('El usuario no existe')
+                }else{
+                    alert(`Credenciales correctas, su contreseña es ${response.password}`)
+                }
+            })
+
         }
     </script>
 </body>

@@ -6,7 +6,7 @@ from Juegos import Juegos
 app = Flask(__name__)
 CORS(app)
 
-juegos = []
+lista_juegos = []
 usuarios = []
 
 contador_usuarios = 2
@@ -36,6 +36,25 @@ def login():
 	return jsonify({
 		"message": "Failed",
 		"usuario": ""
+	})
+
+#Método para recuperar la contraseña
+@app.route('/recuperar/',methods=['POST'])
+def recuperacion():
+	global usuarios
+	username = request.json["usuario"]
+
+	for user in usuarios:
+		if user.getUsuario() == username:
+			return jsonify({
+				"message": "Succesfully",
+				"usuario": user.getUsuario(),
+				"password": user.getPassword()
+				})
+
+	return jsonify({
+		"message": "Failed",
+		"usuario": "No encontrado"
 	})
 
 #Método para registrar
@@ -102,24 +121,6 @@ def mostrar_personas():
 		Datos.append(Dato)
 	respuesta = jsonify(Datos)	
 	return (respuesta)
-'''
-#Crear un usuario e ingresarlo al arreglo
-@app.route('/usuarios/', methods=['POST'])
-def agregar_usuario():
-	global usuarios
-	global contador_usuarios
-
-	usuario = request.json['usuario']
-	password = request.json['password']
-
-	for user in usuarios:
-		if user.autenticacion(usuario, password) == True:
-			return jsonify({"message": "Failed", "reason": "El usuario ya existe"})
-
-	nuevo = Persona(contador_usuarios, request.json['nombre'], request.json['apellido'], request.json['usuario'], request.json['password'])
-	contador_usuarios = contador_usuarios + 1
-	usuarios.append(nuevo)	
-	return jsonify({"message": "successfully", "reason": "Usuario creado"})'''
 
 #Modificar un dato del arreglo de usuarios
 @app.route('/usuarios/<string:user>', methods=['PUT'])
@@ -150,8 +151,29 @@ def borrar_usuario(user):
 @app.route('/juegos/', methods=['POST'])
 def crear_juego():
 
-	
-	return jsonify({'message': 'successfully', 'reason': 'juego creado'})
+	global lista_juegos
+	global contador_juegos
+
+	nombre = request.json["nombre"]
+	anio = request.json["anio"]
+	precio	= request.json['precio']
+	categoria1 = request.json['categoria1']
+	categoria2 = request.json['categoria2']
+	categoria3 = request.json['categoria3']
+	foto = request.json['foto']
+	banner = request.json['banner']
+	descripcion = request.json['descripcion']
+
+	for juego in lista_juegos:
+		if juego.getNombre() == nombre:
+			return jsonify({"message": "Failed", "reason": "El juego ya existe"})
+
+	nuevo_juego = Juegos(contador_juegos, nombre, anio, precio, categoria1,categoria2, categoria3, foto, banner, descripcion)
+	contador_juegos = contador_juegos + 1
+	lista_juegos.append(nuevo_juego)	
+	mensaje = {"message": "Successfully","reason": "Juego creado"}
+	return jsonify(mensaje)
+
 	
 @app.route('/')
 def mensaje():
