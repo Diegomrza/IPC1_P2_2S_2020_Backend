@@ -20,7 +20,7 @@ usuarios.append(Persona(1,'usuario','generico',"user",'123',"cliente"))
 
 #Método para ingresar
 @app.route('/login/', methods=['POST'])
-def login(tipo):
+def login():
 
 	global usuarios
 	username = request.json["usuario"]
