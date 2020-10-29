@@ -116,53 +116,49 @@
     <script></script>
     <script src="js/active.js"></script>
 
-
-
-
-    <script>
-
-        function cargarInfo() {
-            var nombre = sessionStorage.getItem('usuario');
-
-            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos',{
-                method = 'GET',
-                headers:{
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-            .catch(err => {
-                console.log(err)
-                alert('Ocurrio un error al momento de obtener los registros')
-            })
-            .then(response => {
-                var mis_juegos = response;
-                console.log(mis_juegos)
-                var game_cards = document.querySelector('#gameCards')
-
-                mis_juegos.forEach(juego => {
-                    game_cards.innerHTML += `<div class="s_product">
-                        <img alt="" src="${juego.foto}">
-                        <div class="s_overlay"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rate">
-                                <h3 style="text-align: center;">${juego.nombre}</h3>
-                                <br>
-                                <h5 style="text-align: center;">${juego.precio}</h5>
-                            </div>
-                        </div>
-                    </div>`
-                });
-            })
-
-            var nombre = sessionStorage.getItem('usuario');
-            alert('Bienvenido '+ nombre)
-
-        }
-        
-    </script>
-
 </body>
 
+<script>
+
+    function cargarInfo() {
+        var nombre = sessionStorage.getItem('usuario');
+
+        fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos',{
+            method = 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+        .catch(err => {
+            console.log(err)
+            alert('Ocurrio un error al momento de obtener los registros')
+        })
+        .then(response => {
+            var mis_juegos = response;
+            console.log(mis_juegos)
+            var game_cards = document.querySelector('#gameCards')
+
+            mis_juegos.forEach(juego => {
+                game_cards.innerHTML += `<div class="s_product">
+                    <img alt="" src="${juego.foto}">
+                    <div class="s_overlay"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="rate">
+                            <h3 style="text-align: center;">${juego.nombre}</h3>
+                            <br>
+                            <h5 style="text-align: center;">${juego.precio}</h5>
+                        </div>
+                    </div>
+                </div>`
+            });
+        })
+
+        var nombre = sessionStorage.getItem('usuario');
+        alert('Bienvenido '+ nombre)
+
+    }
+    
+</script>
 </html>
