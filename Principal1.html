@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Pagina principal</title>
@@ -14,197 +15,176 @@
     <link rel="stylesheet" href="css/jquery.bxSlider.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header>
-<section class="header-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <ul>
-                        <li><a href="#">Cuenta</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                </div>
-                
-            </div>
-        </div>
-</section>
-<section class="header-catagory">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-            
+
+<body onload="cargarInfo()">
+    <header>
+        <section class="header-top">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                    <form method="post" action="#">
-                        <input type="text" placeholder="Buscar">
-                    <select>
-                        <option>Acción</option>
-                        <option>Terror</option>
-                        <option>Aventura</option>
-                        <option>Puzzle</option>
-                        <option>Misterio</option>
-                    </select>
-                    <button><i class="fa fa-search"></i></button>
-                    </form>
+                    <div class="col-md-4">
+
+
+                    </div>
+                    <div class="col-md-4">
+
+
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<div class="clear"></div>
-<section class="header">
-        <div class="container">
+        </section>
+        <section class="header-catagory">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" action="#">
+                                    <input type="text" placeholder="Buscar">
+                                    <select>
+                                        <option>Acción</option>
+                                        <option>Terror</option>
+                                        <option>Aventura</option>
+                                        <option>Puzzle</option>
+                                        <option>Misterio</option>
+                                    </select>
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="clear"></div>
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Catálogo de videjuegos</a></li>
+                            <li><a href="#">Mi biblioteca</a></li>
+                            <li><a href="#">Perfil</a></li>
+                            <li><a href="#">Carga Masiva</a></li>
+                            <li><a href="#">CRUD de videjuegos</a></li>
+                            <li><a href="#">Generar Reportes</a></li>
+                            <li><a href="#">Crear Usuario</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <div class="related-products">
+        <div class="product">
             <div class="row">
                 <div class="col-md-3">
-                </div>
-                <div class="col-md-7">
-                    <ul class="nav navbar-nav">
-                      <li class="active"><a href="#">Catálogo de videjuegos</a></li>
-                      <li><a href="#">Mi biblioteca</a></li>
-                      <li><a href="#">Perfil</a></li>
-                      <li><a href="#">Carga Masiva</a></li>
-                      <li><a href="#">CRUD de videjuegos</a></li>
-                      <li><a href="#">Generar Reportes</a></li>
-                      <li><a href="#">Crear Usuario</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                </div>
-            </div>
-        </div>
-    </section>
-</header>
-<section class="header-feahion">
-    <img src="https://images5.alphacoders.com/283/thumb-1920-283377.jpg" alt="">
-    <div class="header-text">
-        <h4>Venta de juegos chavón</h4>
-        <h3>Squery<br> Game Store!</h3>
-    </div>
-</section>
-
-<section class="product-s-display">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="s_display">
-                    <img src="imagen.jpg" alt="">
-                    
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="s_display">
-                   <img src="imagen.jpg" alt="">
-                   
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="s_display">
-                    <img src="imagen.jpg" alt="">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="related-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="bar">
-                        <h2>Recomendado para ti</h2>
-                        <img alt="" src="">
+                    <div class="s_product">
+                        <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/71IbB6HBvKL._SL1076_.jpg">
+                        <div class="s_overlay"></div>
+                        <h3>Texto</h3>
                     </div>
-                </div>
-            </div>
-            <div class="product">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="s_product">
-                            <img alt="" src="https://images-na.ssl-images-amazon.com/images/I/71IbB6HBvKL._SL1076_.jpg">
-                            <div class="s_overlay"></div>
-                            <h3>Texto</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="rate">
-                                    <h3>Pocket Tee</h3>
-                                    <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                                    <h5>Q</h5>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3>Need For Speed</h3>
+                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
+                                        aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true"
+                                            class="fa fa-star"></i></span></p>
+                                <h5>Q.500.00</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="s_product">
-                            <img alt="" src="https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg">
-                            <div class="s_overlay"></div>
-                            <h3>Texto</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="rate">
-                                    <h3>Pocket Tee</h3>
-                                    <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                                    <h5>Q</h5>
-                                </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="s_product">
+                        <img alt=""
+                            src="https://media.vandal.net/m/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg">
+                        <div class="s_overlay"></div>
+                        <h3>Texto</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3>Zelda</h3>
+                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
+                                        aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true"
+                                            class="fa fa-star"></i></span></p>
+                                <h5>Q.500.00</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="s_product">
-                            <img alt="" src="https://vignette.wikia.nocookie.net/nintendo/images/0/04/New_Super_Mario_Bros_Wii_Portada.jpg/revision/latest/scale-to-width-down/340?cb=20130705160034&path-prefix=es">
-                            <div class="s_overlay"></div>
-                            <h3>Texto</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="rate">
-                                    <h3>Pocket Tee</h3>
-                                    <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p>
-                                    <h5>Q</h5>
-                                </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="s_product">
+                        <img alt=""
+                            src="https://vignette.wikia.nocookie.net/nintendo/images/0/04/New_Super_Mario_Bros_Wii_Portada.jpg/revision/latest/scale-to-width-down/340?cb=20130705160034&path-prefix=es">
+                        <div class="s_overlay"></div>
+                        <h3>Texto</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3>New Super Mario Bros Wii</h3>
+                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
+                                        aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i></p>
+                                <h5>Q.500.00</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="s_product">
-                            <img alt="" src="https://2.bp.blogspot.com/_7KHM-geGHsw/TH0a9FF-32I/AAAAAAAAAVk/0NIKU6D17uE/s1600/Ggowgos.jpg">
-                            <div class="s_overlay"></div>
-                            <h3>Texto</h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="rate">
-                                    <h3>Pocket Tee</h3>
-                                    <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p>
-                                    <h5>Q</h5>
-                                </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="s_product">
+                        <img alt=""
+                            src="https://2.bp.blogspot.com/_7KHM-geGHsw/TH0a9FF-32I/AAAAAAAAAVk/0NIKU6D17uE/s1600/Ggowgos.jpg">
+                        <div class="s_overlay"></div>
+                        <h3>Texto</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3>God Of War</h3>
+                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i
+                                        aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true"
+                                        class="fa fa-star"></i></p>
+                                <h5>Q.500.00</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-</div>
-<section class="season">
-   <img src="https://i.pinimg.com/originals/22/a7/8f/22a78fd2de1ab9dad715c92a6278469a.jpg" alt="">
-    <div class="ovearlay"></div>
-    <div class="text">
     </div>
-</section>
+    </div>
 
 
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/owl.carousel.min.js"></script> 
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery.bxSlider.js"></script>
-<script>
-   
-    </script>  
-<script src="js/active.js"></script>  
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.bxSlider.js"></script>
+    <script></script>
+    <script src="js/active.js"></script>
+
+    <script>
+
+        function cargarInfo() {
+            var nombre = sessionStorage.getItem('usuario');
+            alert('Bienvenido ' + nombre)
+        }
+        
+    </script>
+
 </body>
+
 </html>
