@@ -64,7 +64,8 @@
                     alert(`Credenciales correctas, bienvenido ${username}`)
                     sessionStorage.setItem("usuario", username)
                     sessionStorage.setItem("password", password)
-                    alert("usted es un: " + response.tipo)
+                    alert("usted es un usuario de tipo: " + response.tipo)
+
                     if(response.tipo == "administrador"){
                         location.href = "Principal1.html"
                     } else{

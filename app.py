@@ -20,12 +20,18 @@ usuarios.append(Persona(1,'susan','herrera',"susy",'555',"cliente"))
 usuarios.append(Persona(1,'usuario','generico',"user",'123',"cliente"))
 
 #Lista de juegos
-lista_juegos.append(Juegos(0, 'Halo', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Hola'))
-lista_juegos.append(Juegos(1, 'God of War', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Adios'))
-lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shoote', 'Estrategia', 'Puzzles', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'Nel'))
-lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'Disparos', 'Estrategia', '', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'No hay'))
-lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','sindesc'))
-lista_juegos.append(Juegos(5, 'Minecraf', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'Si hay'))
+lista_juegos.append(Juegos(0, 'Halo', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://www.somosxbox.com/wp-content/uploads/2020/07/portada-oficial-de-Halo-Infinite.jpg', '', 'Hola'))
+lista_juegos.append(Juegos(1, 'God of War', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://images-na.ssl-images-amazon.com/images/I/51HGPUarUJL._AC_.jpg', '', 'Adios'))
+lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shooter', 'Estrategia', 'Puzzles', 'https://media.vandal.net/t200/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg','', 'Nel'))
+lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'aventura', 'Estrategia', 'plataformas', 'https://img.elcomercio.pe/files/listing_ec_flujo_xx/uploads/2019/09/10/5d782abdf1f30.jpeg','', 'No hay'))
+lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://1.bp.blogspot.com/-vRye3bO-Ghk/Xc4mVG7azII/AAAAAAAAFTM/w7LqEKFmH5Av1XtAXAO2yyI-rvO292mCgCPcBGAYYCw/s640/1539.jpg','','sindesc'))
+lista_juegos.append(Juegos(5, 'Minecraft', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://vignette.wikia.nocookie.net/c-s/images/8/88/2127186-box_minecraft_large.png/revision/latest?cb=20121218031643','', 'Si hay'))
+lista_juegos.append(Juegos(6, 'Halo2', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Hola'))
+lista_juegos.append(Juegos(7, 'God of War2', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Adios'))
+lista_juegos.append(Juegos(8, 'Zelda2', 2018, 300, 'Shooter', 'Estrategia', 'Puzzles', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'Nel'))
+lista_juegos.append(Juegos(9, 'Mario2', 2000, 300, 'aventura', 'Estrategia', 'plataformas', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'No hay'))
+lista_juegos.append(Juegos(10, 'Need for Speed2', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','sindesc'))
+lista_juegos.append(Juegos(11, 'Minecraft2', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'Si hay'))
 
 for juego in lista_juegos:
 	print(juego.getNombre())
@@ -40,7 +46,6 @@ def login():
 	username = request.json["usuario"]
 	password = request.json["password"]
 	
-
 	for user in usuarios:
 		if user.getUsuario() == username and user.getPassword() == password:
 			return jsonify({

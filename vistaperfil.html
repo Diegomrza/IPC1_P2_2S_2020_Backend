@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Principal Admin</title>
+    <title>Pagina principal</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="cargar()">
+<body onload="cargarDatosUsuario()">
     <header>
         <section class="header-top">
             <div class="container">
@@ -30,7 +30,6 @@
                             <a href="loginvista.html">
                                 <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
                             </a>
-                            
                         </div>
                     </div>
                 </div>
@@ -59,7 +58,6 @@
                     </div>
                 </div>
             </div>
-            
             <div>
                 <img id="Logo" src="Logo Tienda.jpg" alt="">
             </div>
@@ -74,7 +72,6 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="#">Catálogo de videjuegos</a></li>
                             <li><a href="#">Mi biblioteca</a></li>
-                            <li><a href="vistaperfil.html">Perfil</a></li>
                             <li><a href="#">Carga Masiva</a></li>
                             <li><a href="#">CRUD de videjuegos</a></li>
                             <li><a href="#">Generar Reportes</a></li>
@@ -113,7 +110,7 @@
 
     <script>
 
-        function cargar() {
+        function cargarDatosUsuario() {
             var nombre = sessionStorage.getItem('usuario');
 
             fetch('http://127.0.0.1:5000/obtenerJuegos', {
@@ -130,21 +127,7 @@
                     var game_cards = document.querySelector('#gameCards')
 
                     mis_juegos.forEach(juego => {
-                        game_cards.innerHTML += `<div class="col-md-3">
-                    <div class="s_product">
-                        <img id="imagen" alt="" src="${juego.foto}">
-                        <div class="s_overlay"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="rate">
-                                <h3 style="text-align: center;">${juego.nombre}</h3>
-                                <br>
-                                <h5 style="text-align: center;">Q.${juego.precio}</h5>
-                            </div>
-                        </div>
-                    </div></br>
-                </div>`
+                        game_cards.innerHTML += ``
                     });
                 })
 

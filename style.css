@@ -2,6 +2,13 @@
     margin: 0;
     padding: 0;
 }
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: url(imagen3.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
 a{
     text-decoration: none  !important;
 }
@@ -295,15 +302,13 @@ a{
 
 .col-md-4.center p {
   margin-left: -60px;
+
 }
 
 .footer_top p i {
   color: #ce8715;
   font-size: 13px;
     margin-right: 10px
-}
-.footer_top .footer-contact p i {
-    font-size: 25px;
 }
 .footer_bottom {
   background: #2a2a2a none repeat scroll 0 0;
@@ -819,9 +824,10 @@ a{
   line-height: 30px;
   margin-top: 33px;
 }
-.related-products .bar {
-  margin: 120px 0 70px;
-  text-align: center;
+
+.related-products .product .row .s_product #imagen{
+	width: 200px;
+	height: 150px;
 }
 .brands .bar {
   margin: 120px 0 70px;
@@ -870,6 +876,10 @@ a{
 .s_product{
     position: relative;
 }
+.s_product div{
+  float: left;
+}
+
 .product {
   margin-bottom: 106px;
 }
@@ -1047,7 +1057,7 @@ a{
   width: 50px;
 }
 .shere p i:hover {
-  color: #f39c12;
+  color: slateblue;
 }
 .shere .fa.fa-google-plus {
   border-right: 1px solid #bfb6b6;
@@ -1130,7 +1140,7 @@ ul.commentlist li .author-name a {
     color: #534f4f;
 }
 .comment .reply p:hover{
-    color: #f39c12;
+    color: slateblue;
 }
 
 .comment input {
@@ -1197,7 +1207,7 @@ ul.commentlist li .author-name a {
     color: #f39c12
 }
 .header-catagory button {
-  background: #f39c12 none repeat scroll 0 0;
+  background: blueviolet none repeat scroll 0 0;
   border: medium none;
   color: #fff;
   font-size: 24px;
@@ -1696,4 +1706,21 @@ section.featured {
 }
 .container {
   width: 1300px !important;
+}
+#gameCards #imagen{
+	width: 275px;
+  height: 225px;
+	border: 3px solid #107a7a;
+  margin: 0px 23px;
+  display: inline-block;
+}
+.related-products .product .row h3 h5{
+  color: #000;
+}
+.header-catagory #Logo{
+	width: 150px;
+	height: 100px;
+  border: 3px solid #107a7a;
+  margin: -50px 15px; 
+  display: inline-block;
 }
