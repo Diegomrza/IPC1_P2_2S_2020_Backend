@@ -26,19 +26,9 @@ lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shooter', 'Estrategia', 'Puzz
 lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'aventura', 'Estrategia', 'plataformas', 'https://img.elcomercio.pe/files/listing_ec_flujo_xx/uploads/2019/09/10/5d782abdf1f30.jpeg','', 'No hay'))
 lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://1.bp.blogspot.com/-vRye3bO-Ghk/Xc4mVG7azII/AAAAAAAAFTM/w7LqEKFmH5Av1XtAXAO2yyI-rvO292mCgCPcBGAYYCw/s640/1539.jpg','','sindesc'))
 lista_juegos.append(Juegos(5, 'Minecraft', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://vignette.wikia.nocookie.net/c-s/images/8/88/2127186-box_minecraft_large.png/revision/latest?cb=20121218031643','', 'Si hay'))
-lista_juegos.append(Juegos(6, 'Halo2', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Hola'))
-lista_juegos.append(Juegos(7, 'God of War2', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Adios'))
-lista_juegos.append(Juegos(8, 'Zelda2', 2018, 300, 'Shooter', 'Estrategia', 'Puzzles', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'Nel'))
-lista_juegos.append(Juegos(9, 'Mario2', 2000, 300, 'aventura', 'Estrategia', 'plataformas', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'No hay'))
-lista_juegos.append(Juegos(10, 'Need for Speed2', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','sindesc'))
-lista_juegos.append(Juegos(11, 'Minecraft2', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'Si hay'))
 
-for juego in lista_juegos:
-	print(juego.getNombre())
-	print(juego.getFoto())
-	print(juego.getPrecio())
 
-#Método para ingresar
+#Método para loguearse -----------------------------------------------------------------------
 @app.route('/login/', methods=['POST'])
 def login():
 
@@ -47,11 +37,15 @@ def login():
 	password = request.json["password"]
 	
 	for user in usuarios:
-		if user.getUsuario() == username and user.getPassword() == password:
+		if user.usuario == username and user.password == password:
 			return jsonify({
 				"message": "Succesfully",
-				"usuario": user.getUsuario(),
-				"tipo": user.getTipo()
+				"nombre": user.nombre,
+				"apellido": user.apellido,
+				"usuario": user.usuario,
+				"password": user.password,
+				"tipo": user.tipo,
+				"id": user.id
 				})
 
 	return jsonify({
@@ -59,7 +53,7 @@ def login():
 		"usuario": ""
 	})
 
-#Método para recuperar la contraseña
+#Método para recuperar la contraseña -------------------------------------------------------
 @app.route('/recuperar/',methods=['POST'])
 def recuperacion():
 	global usuarios
@@ -78,7 +72,7 @@ def recuperacion():
 		"usuario": "No encontrado"
 	})
 
-#Método para registrar
+#Método para registrarse ---------------------------------------------------------------------
 @app.route('/registro/', methods=['POST'])
 def registro():
 
@@ -105,58 +99,60 @@ def registro():
 	return jsonify(mensaje)	
 
 
-#Mostrar solo un usuario recibiendo su usuario como parámetro
-@app.route('/usuarios/<string:user>', methods=['GET'])
-def obtener_persona(user):
+#Método para mostrar un usuario ---------------------------------------------------------------
+@app.route('/usuarios/<int:id>', methods=['GET'])
+def obtener_persona(id):
 	global usuarios
-	Datos = []
 
 	for usuario in usuarios:
-		if user == usuario.getUsuario():
-			Dato = {'id': usuario.getId(),
+		if id == usuario.getId():
+			dato = {
+					'id': usuario.getId(),
 			    	'nombre': usuario.getNombre(),
 				    'apellido': usuario.getApellido(),
 				    'usuario': usuario.getUsuario(),
 				    'password': usuario.getPassword(),
 					'tipo': usuario.getTipo()
                     }
-			Datos.append(Dato)
 			break
 
-	respuesta = jsonify(Datos)	
+	respuesta = jsonify(dato)	
 	return respuesta
 
-#Mostrar todos los usuarios
+#Método para mostrar todos los usuarios -------------------------------------------------------
 @app.route('/usuarios/', methods=['GET'])
 def mostrar_personas():
 	global usuarios
-	Datos = []
+	datos = []
 	for usuario in usuarios:
-		Dato = {'id': usuario.getId(),
+		dato = {
+				'id': usuario.getId(),
 				'nombre': usuario.getNombre(),
 				'apellido': usuario.getApellido(),
 				'usuario': usuario.getUsuario(),
 				'password': usuario.getPassword(),
 				'tipo': usuario.getTipo()
 				}
-		Datos.append(Dato)
-	respuesta = jsonify(Datos)	
+		datos.append(dato)
+	respuesta = jsonify(datos)	
 	return (respuesta)
 
-#Modificar un dato del arreglo de usuarios
-@app.route('/usuarios/<string:user>', methods=['PUT'])
-def editar_usuario(user):
+#Método para modificar un usuario -------------------------------------------------------------
+@app.route('/usuarios/<int:id>', methods=['PUT'])
+def editar_usuario(id):
 	global usuarios
+
 	for i in range(len(usuarios)):
-		if user == usuarios[i].usuario:
+		if id == usuarios[i].id:
 			usuarios[i].setNombre(request.json["nombre"])
 			usuarios[i].setApellido(request.json["apellido"])
 			usuarios[i].setUsuario(request.json["usuario"])
 			usuarios[i].setPassword(request.json["password"])
 			break
+				
 	return jsonify({"message": "Se actualizaron los datos correctamente"})	
 
-#Eliminar un usuario del arreglo de usuarios
+#Método para eliminar un usuario --------------------------------------------------------------
 @app.route('/usuarios/<string:user>', methods=['DELETE'])
 def borrar_usuario(user):
 	global usuarios
@@ -166,9 +162,10 @@ def borrar_usuario(user):
 			break
 	return jsonify({"message": "Se eliminaron los datos correctamente"})	
 
+
 #Métodos para los juegos
 
-#Creacion de juegos
+#Método para crear juegos ---------------------------------------------------------------------
 @app.route('/juegos/', methods=['POST'])
 def crear_juego():
 
@@ -195,7 +192,7 @@ def crear_juego():
 	mensaje = {"message": "Successfully","reason": "Juego creado"}
 	return jsonify(mensaje)
 
-#Método para obtener todos los juegos
+#Método para obtener todos los juegos ---------------------------------------------------------
 @app.route('/obtenerJuegos')
 def obtener_juegos():
 	global lista_juegos
