@@ -9,23 +9,23 @@ CORS(app)
 lista_juegos = []
 usuarios = []
 
-contador_usuarios = 2
+contador_usuarios = 5
 contador_juegos = 0
 
 #Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
 usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana',"cliente"))
-usuarios.append(Persona(1,'kelly','herrea',"killy",'Arielito',"cliente"))
-usuarios.append(Persona(1,'susan','herrera',"susy",'555',"cliente"))
-usuarios.append(Persona(1,'usuario','generico',"user",'123',"cliente"))
+usuarios.append(Persona(2,'kelly','herrea',"killy",'Arielito',"cliente"))
+usuarios.append(Persona(3,'susan','herrera',"susy",'555',"cliente"))
+usuarios.append(Persona(4,'usuario','generico',"user",'123',"cliente"))
 
 #Lista de juegos
-lista_juegos.append(Juegos(0, 'Halo', 2020, 300, 'Disparos', 'Estrategia', 'Suspenso', 'https://www.somosxbox.com/wp-content/uploads/2020/07/portada-oficial-de-Halo-Infinite.jpg', '', 'Hola'))
-lista_juegos.append(Juegos(1, 'God of War', 2015, 300, 'Cocina', 'Estrategia', 'Miedo', 'https://images-na.ssl-images-amazon.com/images/I/51HGPUarUJL._AC_.jpg', '', 'Adios'))
-lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'Shooter', 'Estrategia', 'Puzzles', 'https://media.vandal.net/t200/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg','', 'Nel'))
-lista_juegos.append(Juegos(3, 'Mario', 2000, 300, 'aventura', 'Estrategia', 'plataformas', 'https://img.elcomercio.pe/files/listing_ec_flujo_xx/uploads/2019/09/10/5d782abdf1f30.jpeg','', 'No hay'))
-lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 300, 'Disparos', 'Estrategia', 'Aventura', 'https://1.bp.blogspot.com/-vRye3bO-Ghk/Xc4mVG7azII/AAAAAAAAFTM/w7LqEKFmH5Av1XtAXAO2yyI-rvO292mCgCPcBGAYYCw/s640/1539.jpg','','sindesc'))
-lista_juegos.append(Juegos(5, 'Minecraft', 2013, 300, 'Disparos', 'Estrategia', 'Thriller', 'https://vignette.wikia.nocookie.net/c-s/images/8/88/2127186-box_minecraft_large.png/revision/latest?cb=20121218031643','', 'Si hay'))
+lista_juegos.append(Juegos(0, 'Halo', 2020, 100, 'prueba', 'estrategia', 'construccion', 'https://www.somosxbox.com/wp-content/uploads/2020/07/portada-oficial-de-Halo-Infinite.jpg', '', 'Esta'))
+lista_juegos.append(Juegos(1, 'God of War', 2015, 200, 'cocina', 'estrategia', 'terror', 'https://images-na.ssl-images-amazon.com/images/I/51HGPUarUJL._AC_.jpg', '', 'Es'))
+lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'disparos', 'estrategia', 'puzzle', 'https://media.vandal.net/t200/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg','', 'una'))
+lista_juegos.append(Juegos(3, 'Mario', 2000, 400, 'aventura', 'Estrategia', 'plataforma', 'https://img.elcomercio.pe/files/listing_ec_flujo_xx/uploads/2019/09/10/5d782abdf1f30.jpeg','', 'descripcion'))
+lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 500, 'disparos', 'estrategia', 'aventura', 'https://1.bp.blogspot.com/-vRye3bO-Ghk/Xc4mVG7azII/AAAAAAAAFTM/w7LqEKFmH5Av1XtAXAO2yyI-rvO292mCgCPcBGAYYCw/s640/1539.jpg','','algo'))
+lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://vignette.wikia.nocookie.net/c-s/images/8/88/2127186-box_minecraft_large.png/revision/latest?cb=20121218031643','', 'chafa'))
 
 
 #Método para loguearse -----------------------------------------------------------------------
@@ -98,6 +98,31 @@ def registro():
 	mensaje = {"message": "Failed","reason": "Las passwords no coinciden"}
 	return jsonify(mensaje)	
 
+#Método para crear usuarios administradores ---------------------------------------------------
+@app.route('/registroAdmin/', methods=['POST'])
+def registro_admin():
+
+	global usuarios
+	global contador_usuarios
+	nombre = request.json["nombre"]
+	apellido = request.json["apellido"]
+	usuario	= request.json['usuario']
+	password = request.json['password']
+	confirmPassword = request.json['confirmPassword']
+
+	for user in usuarios:
+		if user.getUsuario() == usuario:
+			return jsonify({"message": "Failed", "reason": "El usuario ya existe"})
+
+	if password == confirmPassword:
+		nuevo = Persona(contador_usuarios, nombre, apellido, usuario, password,'administrador')
+		contador_usuarios = contador_usuarios + 1
+		usuarios.append(nuevo)	
+		mensaje = {"message": "Successfully","reason": "Usuario creado"}
+		return jsonify(mensaje)
+
+	mensaje = {"message": "Failed","reason": "Las passwords no coinciden"}
+	return jsonify(mensaje)	
 
 #Método para mostrar un usuario ---------------------------------------------------------------
 @app.route('/usuarios/<int:id>', methods=['GET'])
@@ -144,6 +169,7 @@ def editar_usuario(id):
 
 	for i in range(len(usuarios)):
 		if id == usuarios[i].id:
+			
 			usuarios[i].setNombre(request.json["nombre"])
 			usuarios[i].setApellido(request.json["apellido"])
 			usuarios[i].setUsuario(request.json["usuario"])
@@ -198,7 +224,8 @@ def obtener_juegos():
 	global lista_juegos
 	Datos = []
 	for juego in lista_juegos:
-		Dato = {'id': juego.getId(),
+		Dato = {
+				'id': juego.getId(),
 				'nombre': juego.getNombre(),
 				'anio': juego.getAnio(),
 				'precio': juego.getPrecio(),
@@ -211,6 +238,34 @@ def obtener_juegos():
 				}
 		Datos.append(Dato)
 	respuesta = jsonify(Datos)	
+	return respuesta
+
+#Método para buscar juegos por genero ---------------------------------------------------------
+@app.route('/juegos/<string:categoria>', methods=['GET'])
+def obtener_un_juego(categoria):
+	global lista_juegos
+	datos = []
+	for juego in lista_juegos:
+		if categoria == juego.categoria1 or categoria == juego.categoria2 or categoria == juego.categoria3:
+			dato = {
+					'id': juego.getId(),
+			    	'nombre': juego.getNombre(),
+				    'anio': juego.getAnio(),
+				    'precio': juego.getPrecio(),
+				    'categoria1': juego.getCategoria1(),
+					'categoria2': juego.getCategoria2(),
+					'categoria3': juego.getCategoria3(),
+					'foto': juego.getFoto(),
+					'banner': juego.getBanner(),
+					'descripcion': juego.getDescripcion()
+                    }
+			datos.append(dato)
+	print(len(datos))		
+	if len(datos) == 0:
+		respuesta = jsonify({"message":"sinResultados"})
+	else:
+		respuesta = jsonify(datos)	
+
 	return respuesta
 
 #Ruta Principal que no tiene nada
