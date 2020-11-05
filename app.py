@@ -10,7 +10,7 @@ lista_juegos = []
 usuarios = []
 
 contador_usuarios = 5
-contador_juegos = 0
+contador_juegos = 6
 
 #Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
@@ -20,12 +20,12 @@ usuarios.append(Persona(3,'susan','herrera',"susy",'555',"cliente"))
 usuarios.append(Persona(4,'usuario','generico',"user",'123',"cliente"))
 
 #Lista de juegos
-lista_juegos.append(Juegos(0, 'Halo', 2020, 100, 'prueba', 'estrategia', 'construccion', 'https://www.somosxbox.com/wp-content/uploads/2020/07/portada-oficial-de-Halo-Infinite.jpg', '', 'Esta'))
-lista_juegos.append(Juegos(1, 'God of War', 2015, 200, 'cocina', 'estrategia', 'terror', 'https://images-na.ssl-images-amazon.com/images/I/51HGPUarUJL._AC_.jpg', '', 'Es'))
-lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'disparos', 'estrategia', 'puzzle', 'https://media.vandal.net/t200/43030/the-legend-of-zelda-breath-of-the-wild-201732131429_1.jpg','', 'una'))
-lista_juegos.append(Juegos(3, 'Mario', 2000, 400, 'aventura', 'Estrategia', 'plataforma', 'https://img.elcomercio.pe/files/listing_ec_flujo_xx/uploads/2019/09/10/5d782abdf1f30.jpeg','', 'descripcion'))
-lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 500, 'disparos', 'estrategia', 'aventura', 'https://1.bp.blogspot.com/-vRye3bO-Ghk/Xc4mVG7azII/AAAAAAAAFTM/w7LqEKFmH5Av1XtAXAO2yyI-rvO292mCgCPcBGAYYCw/s640/1539.jpg','','algo'))
-lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://vignette.wikia.nocookie.net/c-s/images/8/88/2127186-box_minecraft_large.png/revision/latest?cb=20121218031643','', 'chafa'))
+lista_juegos.append(Juegos(0, 'Halo', 2020, 100, 'prueba', 'estrategia', 'construccion', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Esta'))
+lista_juegos.append(Juegos(1, 'God of War', 2015, 200, 'cocina', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Es'))
+lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'disparos', 'estrategia', 'puzzle', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'una'))
+lista_juegos.append(Juegos(3, 'Mario', 2000, 400, 'aventura', 'Estrategia', 'plataforma', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'descripcion'))
+lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 500, 'disparos', 'estrategia', 'aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','algo'))
+lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'chafa'))
 
 
 #Método para loguearse -----------------------------------------------------------------------
@@ -198,9 +198,11 @@ def crear_juego():
 	global lista_juegos
 	global contador_juegos
 
-	nombre = request.json["nombre"]
-	anio = request.json["anio"]
-	precio	= request.json['precio']
+	flag = True
+
+	nombre = request.json['nombre']
+	anio = request.json['anio']
+	precio = request.json['precio']
 	categoria1 = request.json['categoria1']
 	categoria2 = request.json['categoria2']
 	categoria3 = request.json['categoria3']
@@ -208,14 +210,18 @@ def crear_juego():
 	banner = request.json['banner']
 	descripcion = request.json['descripcion']
 
-	for juego in lista_juegos:
-		if juego.getNombre() == nombre:
-			return jsonify({"message": "Failed", "reason": "El juego ya existe"})
+	if nombre == "":
+		flag = False
+	else:
+		nuevo_juego = Juegos(contador_juegos,nombre,anio,precio,categoria1,categoria2,categoria3,foto,banner,descripcion)
+		contador_juegos = contador_juegos + 1
+		lista_juegos.append(nuevo_juego)
 
-	nuevo_juego = Juegos(contador_juegos, nombre, anio, precio, categoria1,categoria2, categoria3, foto, banner, descripcion)
-	contador_juegos = contador_juegos + 1
-	lista_juegos.append(nuevo_juego)	
-	mensaje = {"message": "Successfully","reason": "Juego creado"}
+	if	flag == True:
+		mensaje = {"message": "Successfully","reason": "Juego creado"}
+	else:
+		mensaje = {"message": "Failed" }
+
 	return jsonify(mensaje)
 
 #Método para obtener todos los juegos ---------------------------------------------------------
@@ -242,7 +248,7 @@ def obtener_juegos():
 
 #Método para buscar juegos por genero ---------------------------------------------------------
 @app.route('/juegos/<string:categoria>', methods=['GET'])
-def obtener_un_juego(categoria):
+def obtener_un_juego_categoria(categoria):
 	global lista_juegos
 	datos = []
 	for juego in lista_juegos:
@@ -267,6 +273,30 @@ def obtener_un_juego(categoria):
 		respuesta = jsonify(datos)	
 
 	return respuesta
+
+#Método para buscar juegos por su id
+@app.route('/juego/<int:id>', methods=['GET'])
+def obtener_un_juego(id):
+	global lista_juegos
+
+	for juego in lista_juegos:
+		if id == juego.getId():
+			dato = {
+					'id': juego.getId(),
+			    	'nombre': juego.getNombre(),
+				    'anio': juego.getAnio(),
+				    'precio': juego.getPrecio(),
+				    'categoria1': juego.getCategoria1(),
+					'categoria2': juego.getCategoria2(),
+					'categoria3': juego.getCategoria3(),
+					'foto': juego.getFoto(),
+					'banner': juego.getBanner(),
+					'descripcion': juego.getDescripcion()
+                    }
+			break
+	respuesta = jsonify(dato)	
+	return respuesta
+
 
 #Ruta Principal que no tiene nada
 @app.route('/')
