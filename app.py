@@ -12,15 +12,15 @@ usuarios = []
 juegos_comprados = []
 comentarios = []
 
-contador_usuarios = 5
+contador_usuarios = 1
 contador_juegos = 5
 
 #Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
-usuarios.append(Persona(1,'diego','robles',"squery",'123',"cliente"))
-usuarios.append(Persona(2,'kelly','herrera',"killy",'456',"cliente"))
-usuarios.append(Persona(3,'susan','herrera',"susy",'321',"cliente"))
-usuarios.append(Persona(4,'usuario','generico',"user",'654',"cliente"))
+#usuarios.append(Persona(1,'diego','robles',"squery",'123',"cliente"))
+#usuarios.append(Persona(2,'kelly','herrera',"killy",'456',"cliente"))
+#usuarios.append(Persona(3,'susan','herrera',"susy",'321',"cliente"))
+#usuarios.append(Persona(4,'usuario','generico',"user",'654',"cliente"))
 
 #Lista de juegos
 lista_juegos.append(Juegos(0, 'Tetris', 1984, 100, 'Puzzle', 'Estrategia', 'Construccion', 'https://www.elotrolado.net/w/images/6/6f/Tetris_%28Caratula_NES%29.jpg', 'https://i.pinimg.com/originals/78/fe/e8/78fee894936f57360a88dd1089aac6ca.png', 'Tetris es un videojuego de lógica originalmente diseñado y programado por Alekséi Pázhitnov en la Unión Soviética. Fue lanzado el 6 de junio de 1984.'))
@@ -164,8 +164,8 @@ def mostrar_personas():
 		datos.append(dato)
 	respuesta = jsonify(datos)	
 	return (respuesta)
-#####
-#####
+
+
 #Método para modificar un usuario -------------------------------------------------------------
 @app.route('/usuarios/<int:id>', methods=['PUT'])
 def editar_usuario(id):
@@ -182,8 +182,7 @@ def editar_usuario(id):
 				
 	return jsonify({"message": "Se actualizaron los datos correctamente"})	
 
-####
-####
+
 #Método para eliminar un usuario --------------------------------------------------------------
 @app.route('/usuarios/<string:user>', methods=['DELETE'])
 def borrar_usuario(user):
