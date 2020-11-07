@@ -2,30 +2,33 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from Personas import Persona
 from Juegos import Juegos
+from Comentarios import Comentarios
 
 app = Flask(__name__)
 CORS(app)
 
 lista_juegos = []
 usuarios = []
+juegos_comprados = []
+comentarios = []
 
 contador_usuarios = 5
-contador_juegos = 6
+contador_juegos = 5
 
 #Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
-usuarios.append(Persona(1,'diego','robles',"squery",'Marihuana',"cliente"))
-usuarios.append(Persona(2,'kelly','herrea',"killy",'Arielito',"cliente"))
-usuarios.append(Persona(3,'susan','herrera',"susy",'555',"cliente"))
-usuarios.append(Persona(4,'usuario','generico',"user",'123',"cliente"))
+usuarios.append(Persona(1,'diego','robles',"squery",'123',"cliente"))
+usuarios.append(Persona(2,'kelly','herrera',"killy",'456',"cliente"))
+usuarios.append(Persona(3,'susan','herrera',"susy",'321',"cliente"))
+usuarios.append(Persona(4,'usuario','generico',"user",'654',"cliente"))
 
 #Lista de juegos
-lista_juegos.append(Juegos(0, 'Halo', 2020, 100, 'prueba', 'estrategia', 'construccion', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', '', 'Esta'))
-lista_juegos.append(Juegos(1, 'God of War', 2015, 200, 'cocina', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', '', 'Es'))
-lista_juegos.append(Juegos(2, 'Zelda', 2018, 300, 'disparos', 'estrategia', 'puzzle', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png','', 'una'))
-lista_juegos.append(Juegos(3, 'Mario', 2000, 400, 'aventura', 'Estrategia', 'plataforma', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png','', 'descripcion'))
-lista_juegos.append(Juegos(4, 'Need for Speed', 1995, 500, 'disparos', 'estrategia', 'aventura', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png','','algo'))
-lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','', 'chafa'))
+lista_juegos.append(Juegos(0, 'Tetris', 1984, 100, 'Puzzle', 'Estrategia', 'Construccion', 'https://www.elotrolado.net/w/images/6/6f/Tetris_%28Caratula_NES%29.jpg', 'https://i.pinimg.com/originals/78/fe/e8/78fee894936f57360a88dd1089aac6ca.png', 'Tetris es un videojuego de lógica originalmente diseñado y programado por Alekséi Pázhitnov en la Unión Soviética. Fue lanzado el 6 de junio de 1984.'))
+lista_juegos.append(Juegos(1, 'God of War', 2005, 200, 'Aventura', 'Estrategia', 'Peleas', 'https://upload.wikimedia.org/wikipedia/en/0/0c/Gowbox.jpg', 'https://www.moodvisuals.com/wp-content/uploads/2019/02/GoW-Header-01.jpg', 'God of War es un videojuego de acción-aventura desarrollado por SCE Santa Monica Studio y distribuido por Sony Computer Entertainment en 2005 para PlayStation 2. '))
+lista_juegos.append(Juegos(2, 'The Legend of Zelda', 1986, 300, 'Aventura', 'Estrategia', 'Accion', 'https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg','https://thenintendoswitchgames.com/appData/the-legend-of-zelda-breath-of-the-wild/banner.jpg', 'The Legend of Zelda es una serie de videojuegos de acción-aventura creada por los diseñadores japoneses Shigeru Miyamoto y Takashi Tezuka​ y desarrollada por Nintendo empresa que también se encarga de su distribución internacional.'))
+lista_juegos.append(Juegos(3, 'Mario', 1983, 400, 'Aventura', 'Estrategia', 'Plataforma', 'https://nintendolatino.com/wp-content/uploads/2013/11/nes-super-mario-bros-1-cover-artwork-for-box.jpg','https://s.libertaddigital.com/2017/11/15/640/320/312x161/super-mario-bros.jpg?390d7ac9-1a2d-4679-8e0d-2a964677b81b', 'Super Mario Bros. o Super Mario Brothers es un videojuego de plataformas diseñado por Shigeru Miyamoto lanzado el 13 de septiembre de 1985 y producido por la compañía Nintendo para la consola Nintendo Entertainment System.'))
+lista_juegos.append(Juegos(4, 'Need for Speed: Most Wanted', 2012, 500, 'Carreras', 'Accion', '', 'https://vignette.wikia.nocookie.net/nfs/images/7/76/NFSMW_Boxart.jpg/revision/latest/top-crop/width/360/height/450?cb=20200127230308&path-prefix=es','https://steam.cryotank.net/wp-content/gallery/needforspeedmostwanted2012/Need-For-Speed-Most-Wanted-2012-06-HD.png','Need for Speed: Most Wanted es un videojuego de carreras de la saga Need for Speed desarrollado por Electronic Arts y Criterion Games para Xbox 360'))
+#lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','https://i.imgur.com/2UXPZpO.jpg', 'chafa'))
 
 
 #Método para loguearse -----------------------------------------------------------------------
@@ -161,7 +164,8 @@ def mostrar_personas():
 		datos.append(dato)
 	respuesta = jsonify(datos)	
 	return (respuesta)
-
+#####
+#####
 #Método para modificar un usuario -------------------------------------------------------------
 @app.route('/usuarios/<int:id>', methods=['PUT'])
 def editar_usuario(id):
@@ -178,6 +182,8 @@ def editar_usuario(id):
 				
 	return jsonify({"message": "Se actualizaron los datos correctamente"})	
 
+####
+####
 #Método para eliminar un usuario --------------------------------------------------------------
 @app.route('/usuarios/<string:user>', methods=['DELETE'])
 def borrar_usuario(user):
@@ -266,7 +272,8 @@ def obtener_un_juego_categoria(categoria):
 					'descripcion': juego.getDescripcion()
                     }
 			datos.append(dato)
-	print(len(datos))		
+	print(len(datos))
+
 	if len(datos) == 0:
 		respuesta = jsonify({"message":"sinResultados"})
 	else:
@@ -297,11 +304,136 @@ def obtener_un_juego(id):
 	respuesta = jsonify(dato)	
 	return respuesta
 
+#Método para agregar juegos a la lista de compras y asociar un id de usuario a cada juego comprado
+@app.route('/adquirirJuego/<int:id>', methods=['POST'])
+def adquirir_un_juego(id):
+	global lista_juegos
+	global juegos_comprados
+
+	id_usuario = request.json['id']
+
+	for juego in lista_juegos:
+		if id == juego.getId():
+			nombre = juego.nombre
+			anio = juego.anio
+			precio = juego.precio
+			categoria1 = juego.categoria1
+			categoria2 = juego.categoria2
+			categoria3 = juego.categoria3
+			foto = juego.foto
+			banner = juego.banner
+			descripcion = juego.descripcion
+			#Creacion del juego nuevo asociandolo con el id del usuario
+			nuevo_juego = Juegos(id_usuario,nombre,anio,precio,categoria1,categoria2,categoria3,foto,banner,descripcion)		
+			juegos_comprados.append(nuevo_juego)		
+			break
+	respuesta = jsonify({'message':'Succesfully'})	
+	return respuesta	
+
+#obtiene todos los juegos asociados a un usuario
+@app.route('/compras/<int:id>', methods=['GET'])
+def obtener_juegos_comprados(id):
+	global juegos_comprados
+	idu = str(id)
+	datos = []
+	for juego in juegos_comprados:
+		if idu == juego.getId():
+			dato = {
+				'id': juego.getId(),
+				'nombre': juego.getNombre(),
+				'anio': juego.getAnio(),
+				'precio': juego.getPrecio(),
+				'categoria1': juego.getCategoria1(),
+				'categoria2': juego.getCategoria2(),
+				'categoria3': juego.getCategoria3(),
+				'foto': juego.getFoto(),
+				'banner': juego.getBanner(),
+				'descripcion': juego.getDescripcion()
+				}
+			datos.append(dato)
+	respuesta = jsonify(datos)	
+	return respuesta
+
+#Método para obtener todas las compras ---------------------------------------------------------
+@app.route('/obtenerCompras')
+def compras_totales():
+	global juegos_comprados
+	Datos = []
+	for juego in juegos_comprados:
+		Dato = {
+				'id': juego.getId(),
+				'nombre': juego.getNombre(),
+				'anio': juego.getAnio(),
+				'precio': juego.getPrecio(),
+				'categoria1': juego.getCategoria1(),
+				'categoria2': juego.getCategoria2(),
+				'categoria3': juego.getCategoria3(),
+				'foto': juego.getFoto(),
+				'banner': juego.getBanner(),
+				'descripcion': juego.getDescripcion()
+				}
+		Datos.append(Dato)
+	respuesta = jsonify(Datos)	
+	return respuesta
+
+#Comentarios
+@app.route('/comentarios/<int:id>', methods=['POST'])
+def crear_comentario(id):
+	global comentarios
+
+	id_usuario = request.json['id']
+	comentario = request.json['comentario']
+	nombre = request.json['usuario']
+
+	comentarios.append(Comentarios(id_usuario, id, comentario, nombre))
+
+	respuesta = jsonify({'message':'Succesfully'})	
+	return respuesta
+
+#Todos los comentarios
+@app.route('/comentarios', methods=['GET'])
+def ver_comentarios():
+	global comentarios
+	coments = []
+
+	for comentario in comentarios:
+		comenta = {
+			'idUsuario': comentario.id_usuario,
+			'idJuego': comentario.id_juego,
+			'comentario': comentario.texto,
+			'usuario': comentario.nombre
+		}
+		coments.append(comenta)
+
+	respuesta = jsonify(coments)	
+	return respuesta
+
+#Solo los comentarios de un juego
+@app.route('/comentarios/<int:id>', methods=['GET'])
+def ver_comentarios_de_juego(id):
+
+	global comentarios
+	coments = []
+
+	for comentario in comentarios:
+		if id == comentario.id_juego:
+			
+			comenta = {
+				'idUsuario': comentario.id_usuario,
+				'idJuego': comentario.id_juego,
+				'comentario': comentario.texto,
+				'usuario': comentario.nombre
+			}
+			coments.append(comenta)
+
+	respuesta = jsonify(coments)	
+	return respuesta	
+
 
 #Ruta Principal que no tiene nada
 @app.route('/')
 def mensaje():
-	return "Hola chiquibeibi"
+	return "Online!"
 
 
 if __name__ == "__main__":
