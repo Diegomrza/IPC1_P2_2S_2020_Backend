@@ -21,6 +21,7 @@ usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
 #usuarios.append(Persona(2,'kelly','herrera',"killy",'456',"cliente"))
 #usuarios.append(Persona(3,'susan','herrera',"susy",'321',"cliente"))
 #usuarios.append(Persona(4,'usuario','generico',"user",'654',"cliente"))
+#usuarios.append(Personas(5,keila,dominguez,key,123,"administrador"))
 
 #Lista de juegos
 lista_juegos.append(Juegos(0, 'Tetris', 1984, 100, 'Puzzle', 'Estrategia', 'Construccion', 'https://www.elotrolado.net/w/images/6/6f/Tetris_%28Caratula_NES%29.jpg', 'https://i.pinimg.com/originals/78/fe/e8/78fee894936f57360a88dd1089aac6ca.png', 'Tetris es un videojuego de lógica originalmente diseñado y programado por Alekséi Pázhitnov en la Unión Soviética. Fue lanzado el 6 de junio de 1984.'))
@@ -28,10 +29,10 @@ lista_juegos.append(Juegos(1, 'God of War', 2005, 200, 'Aventura', 'Estrategia',
 lista_juegos.append(Juegos(2, 'The Legend of Zelda', 1986, 300, 'Aventura', 'Estrategia', 'Accion', 'https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg','https://thenintendoswitchgames.com/appData/the-legend-of-zelda-breath-of-the-wild/banner.jpg', 'The Legend of Zelda es una serie de videojuegos de acción-aventura creada por los diseñadores japoneses Shigeru Miyamoto y Takashi Tezuka​ y desarrollada por Nintendo empresa que también se encarga de su distribución internacional.'))
 lista_juegos.append(Juegos(3, 'Mario', 1983, 400, 'Aventura', 'Estrategia', 'Plataforma', 'https://nintendolatino.com/wp-content/uploads/2013/11/nes-super-mario-bros-1-cover-artwork-for-box.jpg','https://s.libertaddigital.com/2017/11/15/640/320/312x161/super-mario-bros.jpg?390d7ac9-1a2d-4679-8e0d-2a964677b81b', 'Super Mario Bros. o Super Mario Brothers es un videojuego de plataformas diseñado por Shigeru Miyamoto lanzado el 13 de septiembre de 1985 y producido por la compañía Nintendo para la consola Nintendo Entertainment System.'))
 lista_juegos.append(Juegos(4, 'Need for Speed: Most Wanted', 2012, 500, 'Carreras', 'Accion', '', 'https://vignette.wikia.nocookie.net/nfs/images/7/76/NFSMW_Boxart.jpg/revision/latest/top-crop/width/360/height/450?cb=20200127230308&path-prefix=es','https://steam.cryotank.net/wp-content/gallery/needforspeedmostwanted2012/Need-For-Speed-Most-Wanted-2012-06-HD.png','Need for Speed: Most Wanted es un videojuego de carreras de la saga Need for Speed desarrollado por Electronic Arts y Criterion Games para Xbox 360'))
-#lista_juegos.append(Juegos(5, 'Minecraft', 2013, 600, 'disparos', 'estrategia', 'terror', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png','https://i.imgur.com/2UXPZpO.jpg', 'chafa'))
 
 
-#Método para loguearse -----------------------------------------------------------------------
+
+#Login
 @app.route('/login/', methods=['POST'])
 def login():
 
@@ -50,13 +51,13 @@ def login():
 				"tipo": user.tipo,
 				"id": user.id
 				})
-
 	return jsonify({
 		"message": "Failed",
 		"usuario": ""
 	})
 
-#Método para recuperar la contraseña -------------------------------------------------------
+
+#Recuperar contraseña
 @app.route('/recuperar/',methods=['POST'])
 def recuperacion():
 	global usuarios
@@ -75,7 +76,9 @@ def recuperacion():
 		"usuario": "No encontrado"
 	})
 
-#Método para registrarse ---------------------------------------------------------------------
+
+
+#Registro 
 @app.route('/registro/', methods=['POST'])
 def registro():
 
@@ -101,7 +104,9 @@ def registro():
 	mensaje = {"message": "Failed","reason": "Las passwords no coinciden"}
 	return jsonify(mensaje)	
 
-#Método para crear usuarios administradores ---------------------------------------------------
+
+
+#Registro como administrador
 @app.route('/registroAdmin/', methods=['POST'])
 def registro_admin():
 
@@ -127,7 +132,8 @@ def registro_admin():
 	mensaje = {"message": "Failed","reason": "Las passwords no coinciden"}
 	return jsonify(mensaje)	
 
-#Método para mostrar un usuario ---------------------------------------------------------------
+
+#Mostrar un usuario
 @app.route('/usuarios/<int:id>', methods=['GET'])
 def obtener_persona(id):
 	global usuarios
@@ -147,7 +153,8 @@ def obtener_persona(id):
 	respuesta = jsonify(dato)	
 	return respuesta
 
-#Método para mostrar todos los usuarios -------------------------------------------------------
+
+#Mostrar todos los usuarios
 @app.route('/usuarios/', methods=['GET'])
 def mostrar_personas():
 	global usuarios
@@ -166,24 +173,34 @@ def mostrar_personas():
 	return (respuesta)
 
 
-#Método para modificar un usuario -------------------------------------------------------------
+#Modificar un usuario
 @app.route('/usuarios/<int:id>', methods=['PUT'])
 def editar_usuario(id):
 	global usuarios
 
-	for i in range(len(usuarios)):
-		if id == usuarios[i].id:
-			
-			usuarios[i].setNombre(request.json["nombre"])
-			usuarios[i].setApellido(request.json["apellido"])
-			usuarios[i].setUsuario(request.json["usuario"])
-			usuarios[i].setPassword(request.json["password"])
-			break
+	usuario = request.json["usuario"]
+
+	if	usuario == "":
+		for i in range(len(usuarios)):
+			if id == usuarios[i].id:
+				usuarios[i].setNombre(request.json["nombre"])
+				usuarios[i].setApellido(request.json["apellido"])
+				usuarios[i].setPassword(request.json["password"])
+				break
+	else:
+		for i in range(len(usuarios)):
+			if id == usuarios[i].id:
+				usuarios[i].setNombre(request.json["nombre"])
+				usuarios[i].setApellido(request.json["apellido"])
+				usuarios[i].setUsuario(request.json["usuario"])
+				usuarios[i].setPassword(request.json["password"])
+				break
+	
 				
 	return jsonify({"message": "Se actualizaron los datos correctamente"})	
 
 
-#Método para eliminar un usuario --------------------------------------------------------------
+#Eliminar un usuario
 @app.route('/usuarios/<string:user>', methods=['DELETE'])
 def borrar_usuario(user):
 	global usuarios
@@ -194,9 +211,8 @@ def borrar_usuario(user):
 	return jsonify({"message": "Se eliminaron los datos correctamente"})	
 
 
-#Métodos para los juegos
 
-#Método para crear juegos ---------------------------------------------------------------------
+#Crear juegos
 @app.route('/juegos/', methods=['POST'])
 def crear_juego():
 
@@ -229,7 +245,8 @@ def crear_juego():
 
 	return jsonify(mensaje)
 
-#Método para obtener todos los juegos ---------------------------------------------------------
+
+#Obtener todos los juegos
 @app.route('/obtenerJuegos')
 def obtener_juegos():
 	global lista_juegos
@@ -251,7 +268,8 @@ def obtener_juegos():
 	respuesta = jsonify(Datos)	
 	return respuesta
 
-#Método para buscar juegos por genero ---------------------------------------------------------
+
+#Obtener juegos por su genero
 @app.route('/juegos/<string:categoria>', methods=['GET'])
 def obtener_un_juego_categoria(categoria):
 	global lista_juegos
@@ -280,7 +298,8 @@ def obtener_un_juego_categoria(categoria):
 
 	return respuesta
 
-#Método para buscar juegos por su id
+
+#Obtener juegos por su id
 @app.route('/juego/<int:id>', methods=['GET'])
 def obtener_un_juego(id):
 	global lista_juegos
@@ -303,14 +322,16 @@ def obtener_un_juego(id):
 	respuesta = jsonify(dato)	
 	return respuesta
 
-#Método para agregar juegos a la lista de compras y asociar un id de usuario a cada juego comprado
+
+#Comprar Juegos  
 @app.route('/adquirirJuego/<int:id>', methods=['POST'])
 def adquirir_un_juego(id):
 	global lista_juegos
 	global juegos_comprados
 
 	id_usuario = request.json['id']
-
+	id_unido = str(id)+","+id_usuario
+	
 	for juego in lista_juegos:
 		if id == juego.getId():
 			nombre = juego.nombre
@@ -322,21 +343,27 @@ def adquirir_un_juego(id):
 			foto = juego.foto
 			banner = juego.banner
 			descripcion = juego.descripcion
+
 			#Creacion del juego nuevo asociandolo con el id del usuario
-			nuevo_juego = Juegos(id_usuario,nombre,anio,precio,categoria1,categoria2,categoria3,foto,banner,descripcion)		
+			nuevo_juego = Juegos(id_unido,nombre,anio,precio,categoria1,categoria2,categoria3,foto,banner,descripcion)		
 			juegos_comprados.append(nuevo_juego)		
 			break
 	respuesta = jsonify({'message':'Succesfully'})	
 	return respuesta	
 
-#obtiene todos los juegos asociados a un usuario
+
+#Mostrar juegos comprados por un usuario
 @app.route('/compras/<int:id>', methods=['GET'])
 def obtener_juegos_comprados(id):
 	global juegos_comprados
+
+	x = []
 	idu = str(id)
 	datos = []
+
 	for juego in juegos_comprados:
-		if idu == juego.getId():
+		x = juego.id.split(',')
+		if idu == x[1]:
 			dato = {
 				'id': juego.getId(),
 				'nombre': juego.getNombre(),
@@ -353,7 +380,8 @@ def obtener_juegos_comprados(id):
 	respuesta = jsonify(datos)	
 	return respuesta
 
-#Método para obtener todas las compras ---------------------------------------------------------
+
+#Obtener todas las compras
 @app.route('/obtenerCompras')
 def compras_totales():
 	global juegos_comprados
@@ -375,7 +403,8 @@ def compras_totales():
 	respuesta = jsonify(Datos)	
 	return respuesta
 
-#Comentarios
+
+#Crear comentarios
 @app.route('/comentarios/<int:id>', methods=['POST'])
 def crear_comentario(id):
 	global comentarios
@@ -389,7 +418,8 @@ def crear_comentario(id):
 	respuesta = jsonify({'message':'Succesfully'})	
 	return respuesta
 
-#Todos los comentarios
+
+#Obtener todos los comentarios
 @app.route('/comentarios', methods=['GET'])
 def ver_comentarios():
 	global comentarios
@@ -407,7 +437,8 @@ def ver_comentarios():
 	respuesta = jsonify(coments)	
 	return respuesta
 
-#Solo los comentarios de un juego
+
+#Obtener solo los comentarios de un juego
 @app.route('/comentarios/<int:id>', methods=['GET'])
 def ver_comentarios_de_juego(id):
 

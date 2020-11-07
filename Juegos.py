@@ -12,9 +12,6 @@ class Juegos:
         self.banner = banner
         self.descripcion = descripcion
     
-    def obtenerTodos(self):
-        return 0
-
     #Getters
     def getId(self):
         return self.id
