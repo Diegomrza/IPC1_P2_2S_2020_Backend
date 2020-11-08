@@ -3,6 +3,7 @@ from flask_cors import CORS
 from Personas import Persona
 from Juegos import Juegos
 from Comentarios import Comentarios
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -246,6 +247,58 @@ def crear_juego():
 	return jsonify(mensaje)
 
 
+#Ver juego
+@app.route('/usuarios/<int:id>', methods=['GET'])
+def ver_juego(id):
+	global usuarios
+
+	for usuario in usuarios:
+		if id == usuario.getId():
+			dato = {
+					'id': usuario.getId(),
+			    	'nombre': usuario.getNombre(),
+				    'apellido': usuario.getApellido(),
+				    'usuario': usuario.getUsuario(),
+				    'password': usuario.getPassword(),
+					'tipo': usuario.getTipo()
+                    }
+			break
+
+	respuesta = jsonify(dato)	
+	return respuesta
+
+#Modificar juego
+@app.route('/modJuegos/<int:id>', methods=['PUT'])
+def modificar_juego(id):
+	global lista_juegos
+
+	for i in range(len(lista_juegos)):
+			if id == lista_juegos[i].id:
+				lista_juegos[i].setNombre(request.json["nombre"])
+				lista_juegos[i].setAnio(request.json["anio"])
+				lista_juegos[i].setPrecio(request.json["precio"])
+				lista_juegos[i].setCategoria1(request.json["categoria1"])
+				lista_juegos[i].setCategoria2(request.json["categoria2"])
+				lista_juegos[i].setCategoria3(request.json["categoria3"])
+				lista_juegos[i].setFoto(request.json["foto"])
+				lista_juegos[i].setBanner(request.json["banner"])
+				lista_juegos[i].setDescripcion(request.json["descripcion"])
+				break
+	
+	return jsonify({"message": "Se actualizaron los datos correctamente"})	
+
+
+#Eliminar juego
+@app.route('/juegosEliminar/<int:id>', methods=['DELETE'])
+def eliminar_juego(id):
+	global lista_juegos
+	for i in range(len(lista_juegos)):
+		if id == lista_juegos[i].id:
+			del lista_juegos[i]
+			break
+	return jsonify({"message": "Se eliminaron el juego correctamente"})
+
+
 #Obtener todos los juegos
 @app.route('/obtenerJuegos')
 def obtener_juegos():
@@ -412,8 +465,11 @@ def crear_comentario(id):
 	id_usuario = request.json['id']
 	comentario = request.json['comentario']
 	nombre = request.json['usuario']
+	fecha = datetime.now()
 
-	comentarios.append(Comentarios(id_usuario, id, comentario, nombre))
+	print(fecha)
+
+	comentarios.append(Comentarios(id_usuario, id, comentario, nombre, fecha))
 
 	respuesta = jsonify({'message':'Succesfully'})	
 	return respuesta
@@ -430,7 +486,8 @@ def ver_comentarios():
 			'idUsuario': comentario.id_usuario,
 			'idJuego': comentario.id_juego,
 			'comentario': comentario.texto,
-			'usuario': comentario.nombre
+			'usuario': comentario.nombre,
+			'fecha': comentario.fecha
 		}
 		coments.append(comenta)
 
@@ -448,11 +505,14 @@ def ver_comentarios_de_juego(id):
 	for comentario in comentarios:
 		if id == comentario.id_juego:
 			
+			print(comentario.fecha)
+			
 			comenta = {
 				'idUsuario': comentario.id_usuario,
 				'idJuego': comentario.id_juego,
 				'comentario': comentario.texto,
-				'usuario': comentario.nombre
+				'usuario': comentario.nombre,
+				'fecha':comentario.fecha
 			}
 			coments.append(comenta)
 
