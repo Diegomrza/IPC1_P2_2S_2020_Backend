@@ -18,16 +18,11 @@ contador_juegos = 5
 
 #Lista de personas
 usuarios.append(Persona(0,'Usuario','Maestro','admin','admin',"administrador"))
-#usuarios.append(Persona(1,'diego','robles',"squery",'123',"cliente"))
-#usuarios.append(Persona(2,'kelly','herrera',"killy",'456',"cliente"))
-#usuarios.append(Persona(3,'susan','herrera',"susy",'321',"cliente"))
-#usuarios.append(Persona(4,'usuario','generico',"user",'654',"cliente"))
-#usuarios.append(Personas(5,keila,dominguez,key,123,"administrador"))
 
 #Lista de juegos
 lista_juegos.append(Juegos(0, 'Tetris', 1984, 100, 'Puzzle', 'Estrategia', 'Construccion', 'https://www.elotrolado.net/w/images/6/6f/Tetris_%28Caratula_NES%29.jpg', 'https://i.pinimg.com/originals/78/fe/e8/78fee894936f57360a88dd1089aac6ca.png', 'Tetris es un videojuego de lógica originalmente diseñado y programado por Alekséi Pázhitnov en la Unión Soviética. Fue lanzado el 6 de junio de 1984.'))
 lista_juegos.append(Juegos(1, 'God of War', 2005, 200, 'Aventura', 'Estrategia', 'Peleas', 'https://upload.wikimedia.org/wikipedia/en/0/0c/Gowbox.jpg', 'https://www.moodvisuals.com/wp-content/uploads/2019/02/GoW-Header-01.jpg', 'God of War es un videojuego de acción-aventura desarrollado por SCE Santa Monica Studio y distribuido por Sony Computer Entertainment en 2005 para PlayStation 2. '))
-lista_juegos.append(Juegos(2, 'The Legend of Zelda', 1986, 300, 'Aventura', 'Estrategia', 'Accion', 'https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg','https://thenintendoswitchgames.com/appData/the-legend-of-zelda-breath-of-the-wild/banner.jpg', 'The Legend of Zelda es una serie de videojuegos de acción-aventura creada por los diseñadores japoneses Shigeru Miyamoto y Takashi Tezuka​ y desarrollada por Nintendo empresa que también se encarga de su distribución internacional.'))
+lista_juegos.append(Juegos(2, 'The Legend of Zelda', 1986, 300, 'Aventura', 'Estrategia', 'Accion', 'https://newesc.com/wp-content/uploads/legend-of-zelda-bow-us.jpg','https://thenintendoswitchgames.com/appData/the-legend-of-zelda-breath-of-the-wild/banner.jpg', 'The Legend of Zelda es una serie de videojuegos de acción-aventura creada por los diseñadores japoneses Shigeru Miyamoto y takashi tezuka y desarrollada por Nintendo empresa que también se encarga de su distribución internacional.'))
 lista_juegos.append(Juegos(3, 'Mario', 1983, 400, 'Aventura', 'Estrategia', 'Plataforma', 'https://nintendolatino.com/wp-content/uploads/2013/11/nes-super-mario-bros-1-cover-artwork-for-box.jpg','https://s.libertaddigital.com/2017/11/15/640/320/312x161/super-mario-bros.jpg?390d7ac9-1a2d-4679-8e0d-2a964677b81b', 'Super Mario Bros. o Super Mario Brothers es un videojuego de plataformas diseñado por Shigeru Miyamoto lanzado el 13 de septiembre de 1985 y producido por la compañía Nintendo para la consola Nintendo Entertainment System.'))
 lista_juegos.append(Juegos(4, 'Need for Speed: Most Wanted', 2012, 500, 'Carreras', 'Accion', '', 'https://vignette.wikia.nocookie.net/nfs/images/7/76/NFSMW_Boxart.jpg/revision/latest/top-crop/width/360/height/450?cb=20200127230308&path-prefix=es','https://steam.cryotank.net/wp-content/gallery/needforspeedmostwanted2012/Need-For-Speed-Most-Wanted-2012-06-HD.png','Need for Speed: Most Wanted es un videojuego de carreras de la saga Need for Speed desarrollado por Electronic Arts y Criterion Games para Xbox 360'))
 
@@ -524,7 +519,6 @@ def ver_comentarios_de_juego(id):
 @app.route('/')
 def mensaje():
 	return "Online!"
-
 
 if __name__ == "__main__":
 	app.run(threaded = True,port = 5000, debug = True)
