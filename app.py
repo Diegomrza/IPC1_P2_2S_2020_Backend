@@ -27,7 +27,6 @@ lista_juegos.append(Juegos(3, 'Mario', 1983, 400, 'Aventura', 'Estrategia', 'Pla
 lista_juegos.append(Juegos(4, 'Need for Speed: Most Wanted', 2012, 500, 'Carreras', 'Accion', '', 'https://vignette.wikia.nocookie.net/nfs/images/7/76/NFSMW_Boxart.jpg/revision/latest/top-crop/width/360/height/450?cb=20200127230308&path-prefix=es','https://steam.cryotank.net/wp-content/gallery/needforspeedmostwanted2012/Need-For-Speed-Most-Wanted-2012-06-HD.png','Need for Speed: Most Wanted es un videojuego de carreras de la saga Need for Speed desarrollado por Electronic Arts y Criterion Games para Xbox 360'))
 
 
-
 #Login
 @app.route('/login/', methods=['POST'])
 def login():
@@ -211,12 +210,9 @@ def borrar_usuario(user):
 #Crear juegos
 @app.route('/juegos/', methods=['POST'])
 def crear_juego():
-
 	global lista_juegos
 	global contador_juegos
-
 	flag = True
-
 	nombre = request.json['nombre']
 	anio = request.json['anio']
 	precio = request.json['precio']
@@ -233,7 +229,7 @@ def crear_juego():
 		nuevo_juego = Juegos(contador_juegos,nombre,anio,precio,categoria1,categoria2,categoria3,foto,banner,descripcion)
 		contador_juegos = contador_juegos + 1
 		lista_juegos.append(nuevo_juego)
-
+		
 	if	flag == True:
 		mensaje = {"message": "Successfully","reason": "Juego creado"}
 	else:
