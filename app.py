@@ -510,8 +510,6 @@ def ver_comentarios_de_juego(id):
 	respuesta = jsonify(coments)	
 	return respuesta	
 
-
-#Ruta Principal que no tiene nada
 @app.route('/')
 def mensaje():
 	return "Online!"
